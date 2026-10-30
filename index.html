@@ -204,6 +204,7 @@ button{font-family:inherit}
 .cat-bg{position:absolute;inset:0;transition:transform .6s cubic-bezier(.22,1,.36,1)}
 .cat-card:hover .cat-bg{transform:scale(1.05)}
 .cat-bg i{position:absolute;top:2rem;right:2rem;font-size:64px;color:rgba(253,252,249,.18)}
+.cat-img{position:absolute;top:1.5rem;right:1.5rem;width:140px;height:140px;object-fit:contain}
 .cat-card::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(29,50,60,0) 35%,rgba(29,50,60,.85) 100%)}
 .cat-body{position:relative;z-index:2}
 .cat-sub{color:rgba(253,252,249,.75);margin-bottom:.4rem;display:block}
@@ -235,7 +236,8 @@ button{font-family:inherit}
 .prod-img{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .prod-img i{font-size:56px;color:rgba(39,65,77,.35);transition:transform .5s cubic-bezier(.22,1,.36,1)}
 .prod-card:hover .prod-img i{transform:scale(1.1)}
-.prod-img img{width:100%;height:100%;object-fit:cover}
+.prod-img img{width:100%;height:100%;object-fit:contain;padding:10%;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.prod-card:hover .prod-img img{transform:scale(1.06)}
 .prod-badge{
   position:absolute;top:.9rem;left:.9rem;background:rgba(253,252,249,.92);color:var(--teal);
   padding:3px 10px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
@@ -398,6 +400,7 @@ button{font-family:inherit}
 .ci{display:flex;gap:1rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--outline)}
 .ci-thumb{width:56px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ci-thumb i{font-size:22px;color:rgba(39,65,77,.45)}
+.ci-thumb img{width:100%;height:100%;object-fit:contain;padding:4px}
 .ci-info{flex:1;min-width:0}
 .ci-name{font-size:14px;font-weight:700;color:var(--teal);margin-bottom:.35rem}
 .ci-price{font-size:13px;color:var(--muted)}
@@ -537,30 +540,30 @@ body.locked{overflow:hidden}
         <div class="accent-bar reveal d1"></div>
         <h2 class="h2 reveal d2">Shop by the way they play.</h2>
       </div>
-      <p class="body-md reveal d3">Three magnetic collections for builders, early learners and little storytellers.</p>
+      <p class="body-md reveal d3">Three magnetic collections of friendly characters for little ones to play, name and share their feelings with.</p>
     </div>
     <div class="cat-grid">
-      <a href="#shop" class="cat-card reveal" data-goto="tiles">
-        <div class="cat-bg" style="background:linear-gradient(150deg,#58879d 0%,#27414d 100%)"><i class="fa-solid fa-cubes"></i></div>
+      <a href="#shop" class="cat-card reveal" data-goto="rabbit">
+        <div class="cat-bg" style="background:linear-gradient(150deg,#e7a9b8 0%,#27414d 100%)"><img class="cat-img" src="media/rabbit-category/magnet-circle_rabbit_01.png" alt="" width="591" height="591"></div>
         <div class="cat-body">
-          <span class="label-sm cat-sub">Build &amp; Create</span>
-          <p class="cat-title">Magnetic Tiles</p>
+          <span class="label-sm cat-sub">Feelings &amp; Emotions</span>
+          <p class="cat-title">Rabbit Collection</p>
           <span class="cat-link">Shop collection <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="#shop" class="cat-card reveal d2" data-goto="learning">
-        <div class="cat-bg" style="background:linear-gradient(150deg,#a7c1cd 0%,#48626f 100%)"><i class="fa-solid fa-font"></i></div>
+      <a href="#shop" class="cat-card reveal d2" data-goto="dino">
+        <div class="cat-bg" style="background:linear-gradient(150deg,#8fb59d 0%,#27414d 100%)"><i class="fa-solid fa-dragon"></i></div>
         <div class="cat-body">
-          <span class="label-sm cat-sub">Learn &amp; Spell</span>
-          <p class="cat-title">Letter &amp; Number Magnets</p>
+          <span class="label-sm cat-sub">Roar &amp; Explore</span>
+          <p class="cat-title">Dino Collection</p>
           <span class="cat-link">Shop collection <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="#shop" class="cat-card reveal d3" data-goto="playsets">
-        <div class="cat-bg" style="background:linear-gradient(150deg,#b09062 0%,#315869 100%)"><i class="fa-solid fa-puzzle-piece"></i></div>
+      <a href="#shop" class="cat-card reveal d3" data-goto="unicorn">
+        <div class="cat-bg" style="background:linear-gradient(150deg,#b9a3cf 0%,#315869 100%)"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
         <div class="cat-body">
-          <span class="label-sm cat-sub">Imagine &amp; Play</span>
-          <p class="cat-title">Magnetic Play Sets</p>
+          <span class="label-sm cat-sub">Dream &amp; Imagine</span>
+          <p class="cat-title">Unicorn Collection</p>
           <span class="cat-link">Shop collection <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
@@ -579,137 +582,497 @@ body.locked{overflow:hidden}
       </div>
       <div class="filter-row reveal d3" id="filters">
         <button class="filter-btn active" data-f="all">All</button>
-        <button class="filter-btn" data-f="tiles">Magnetic Tiles</button>
-        <button class="filter-btn" data-f="learning">Letters &amp; Numbers</button>
-        <button class="filter-btn" data-f="playsets">Play Sets</button>
+        <button class="filter-btn" data-f="rabbit">Rabbit Collection</button>
+        <button class="filter-btn" data-f="dino">Dino Collection</button>
+        <button class="filter-btn" data-f="unicorn">Unicorn Collection</button>
       </div>
     </div>
 
     <div class="prod-grid" id="prod-grid">
 
-      <div class="prod-card reveal" data-c="tiles">
-        <div class="prod-img" style="background:#e6edf0">
-          <span class="prod-badge">Bestseller</span>
-          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-cubes"></i>
-        </div>
-        <div class="prod-body">
-          <p class="prod-cat">Magnetic Tiles</p>
-          <p class="prod-title">Rainbow Magnetic Tiles (60 pcs)</p>
-          <p class="prod-stars">★★★★★<span>(412)</span></p>
-          <div class="prod-foot">
-            <span class="prod-price">฿1,290</span>
-          </div>
-          <button class="add-btn" data-name="Rainbow Magnetic Tiles (60 pcs)" data-price="1290"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
-        </div>
-      </div>
-      <div class="prod-card reveal d1" data-c="learning">
-        <div class="prod-img" style="background:#efe9df">
+      <div class="prod-card reveal" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
           <span class="prod-badge">New</span>
           <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-font"></i>
+          <img src="media/rabbit-category/magnet-circle_rabbit_01.png" alt="Rabbit magnet showing the feeling &quot;Happy&quot;" width="591" height="591" loading="lazy">
         </div>
         <div class="prod-body">
-          <p class="prod-cat">Letter &amp; Number</p>
-          <p class="prod-title">Magnetic ABC Letters</p>
-          <p class="prod-stars">★★★★★<span>(186)</span></p>
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Happy</p>
           <div class="prod-foot">
-            <span class="prod-price">฿390</span>
+            <span class="prod-price">฿59</span>
           </div>
-          <button class="add-btn" data-name="Magnetic ABC Letters" data-price="390"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Happy" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
         </div>
       </div>
-      <div class="prod-card reveal d2" data-c="playsets">
-        <div class="prod-img" style="background:#dfe8ec">
+      <div class="prod-card reveal d1" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
           <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-paw"></i>
+          <img src="media/rabbit-category/magnet-circle_rabbit_02.png" alt="Rabbit magnet showing the feeling &quot;Sad&quot;" width="591" height="591" loading="lazy">
         </div>
         <div class="prod-body">
-          <p class="prod-cat">Play Sets</p>
-          <p class="prod-title">Animal Dress-Up Magnet Puzzle</p>
-          <p class="prod-stars">★★★★☆<span>(97)</span></p>
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Sad</p>
           <div class="prod-foot">
-            <span class="prod-price">฿450</span>
+            <span class="prod-price">฿59</span>
           </div>
-          <button class="add-btn" data-name="Animal Dress-Up Magnet Puzzle" data-price="450"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Sad" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
         </div>
       </div>
-      <div class="prod-card reveal d3" data-c="tiles">
-        <div class="prod-img" style="background:#f2efe8">
-          <span class="prod-badge">Sale</span>
+      <div class="prod-card reveal d2" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
           <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-shapes"></i>
+          <img src="media/rabbit-category/magnet-circle_rabbit_03.png" alt="Rabbit magnet showing the feeling &quot;Angry&quot;" width="591" height="591" loading="lazy">
         </div>
         <div class="prod-body">
-          <p class="prod-cat">Magnetic Tiles</p>
-          <p class="prod-title">Magnetic Tiles Starter (32 pcs)</p>
-          <p class="prod-stars">★★★★★<span>(328)</span></p>
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Angry</p>
           <div class="prod-foot">
-            <span class="prod-price">฿690<s>฿890</s></span>
+            <span class="prod-price">฿59</span>
           </div>
-          <button class="add-btn" data-name="Magnetic Tiles Starter (32 pcs)" data-price="690"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Angry" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
         </div>
       </div>
-      <div class="prod-card reveal" data-c="playsets">
+      <div class="prod-card reveal d3" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_04.png" alt="Rabbit magnet showing the feeling &quot;Scared&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Scared</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Scared" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_05.png" alt="Rabbit magnet showing the feeling &quot;Excited&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Excited</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Excited" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d1" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_06.png" alt="Rabbit magnet showing the feeling &quot;Brave&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Brave</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Brave" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d2" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_07.png" alt="Rabbit magnet showing the feeling &quot;Shy&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Shy</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Shy" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d3" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_08.png" alt="Rabbit magnet showing the feeling &quot;Sorry&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Sorry</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Sorry" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_09.png" alt="Rabbit magnet showing the feeling &quot;Surprised&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Surprised</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Surprised" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d1" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_10.png" alt="Rabbit magnet showing the feeling &quot;Jealous&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Jealous</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Jealous" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d2" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_11.png" alt="Rabbit magnet showing the feeling &quot;Embarrassed&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Embarrassed</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Embarrassed" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d3" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_15.png" alt="Rabbit magnet showing the feeling &quot;Frustrated&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Frustrated</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Frustrated" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_16.png" alt="Rabbit magnet showing the feeling &quot;Left Out&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Left Out</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Left Out" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d1" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_17.png" alt="Rabbit magnet showing the feeling &quot;Curious&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Curious</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Curious" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d2" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_21.png" alt="Rabbit magnet showing the feeling &quot;Grumpy&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Grumpy</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Grumpy" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d3" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_22.png" alt="Rabbit magnet showing the feeling &quot;Proud&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Proud</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Proud" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_23.png" alt="Rabbit magnet showing the feeling &quot;Guilty&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Guilty</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Guilty" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d1" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_27.png" alt="Rabbit magnet showing the feeling &quot;Uncomfortable&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Uncomfortable</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Uncomfortable" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d2" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_28.png" alt="Rabbit magnet showing the feeling &quot;Hurt&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Hurt</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Hurt" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d3" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_29.png" alt="Rabbit magnet showing the feeling &quot;Bored&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Bored</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Bored" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_30.png" alt="Rabbit magnet showing the feeling &quot;Nervous&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Nervous</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Nervous" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d1" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_31.png" alt="Rabbit magnet showing the feeling &quot;Confident&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Confident</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Confident" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d2" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_32.png" alt="Rabbit magnet showing the feeling &quot;Confused&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Confused</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Confused" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d3" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_33.png" alt="Rabbit magnet showing the feeling &quot;Sensitive&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Sensitive</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Sensitive" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_34.png" alt="Rabbit magnet showing the feeling &quot;Tired&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Tired</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Tired" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d1" data-c="rabbit">
+        <div class="prod-img" style="background:#f6eef0">
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="media/rabbit-category/magnet-circle_rabbit_35.png" alt="Rabbit magnet showing the feeling &quot;Hungry&quot;" width="591" height="591" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Rabbit Collection</p>
+          <p class="prod-title">Rabbit Feelings Magnet: Hungry</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Rabbit Feelings Magnet: Hungry" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d2" data-c="dino">
         <div class="prod-img" style="background:#e3ebe6">
+          <span class="prod-badge">Coming soon</span>
           <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-fish"></i>
+          <i class="fa-solid fa-dragon"></i>
         </div>
         <div class="prod-body">
-          <p class="prod-cat">Play Sets</p>
-          <p class="prod-title">Magnetic Fishing Game</p>
-          <p class="prod-stars">★★★★★<span>(154)</span></p>
+          <p class="prod-cat">Dino Collection</p>
+          <p class="prod-title">Dino Magnet 01</p>
           <div class="prod-foot">
-            <span class="prod-price">฿420</span>
+            <span class="prod-price">฿59</span>
           </div>
-          <button class="add-btn" data-name="Magnetic Fishing Game" data-price="420"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+          <button class="add-btn" data-name="Dino Magnet 01" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
         </div>
       </div>
-      <div class="prod-card reveal d1" data-c="learning">
-        <div class="prod-img" style="background:#ece7dd">
-          <span class="prod-badge">New</span>
+      <div class="prod-card reveal d3" data-c="dino">
+        <div class="prod-img" style="background:#e3ebe6">
+          <span class="prod-badge">Coming soon</span>
           <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-language"></i>
+          <i class="fa-solid fa-dragon"></i>
         </div>
         <div class="prod-body">
-          <p class="prod-cat">Letter &amp; Number</p>
-          <p class="prod-title">Thai Alphabet Magnets (ก–ฮ)</p>
-          <p class="prod-stars">★★★★★<span>(211)</span></p>
+          <p class="prod-cat">Dino Collection</p>
+          <p class="prod-title">Dino Magnet 02</p>
           <div class="prod-foot">
-            <span class="prod-price">฿450</span>
+            <span class="prod-price">฿59</span>
           </div>
-          <button class="add-btn" data-name="Thai Alphabet Magnets (ก–ฮ)" data-price="450"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+          <button class="add-btn" data-name="Dino Magnet 02" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
         </div>
       </div>
-      <div class="prod-card reveal d2" data-c="tiles">
-        <div class="prod-img" style="background:#e6edf0">
+      <div class="prod-card reveal" data-c="dino">
+        <div class="prod-img" style="background:#e3ebe6">
+          <span class="prod-badge">Coming soon</span>
           <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-car-side"></i>
+          <i class="fa-solid fa-dragon"></i>
         </div>
         <div class="prod-body">
-          <p class="prod-cat">Magnetic Tiles</p>
-          <p class="prod-title">Magnetic Car &amp; Ramp Add-On</p>
-          <p class="prod-stars">★★★★★<span>(143)</span></p>
+          <p class="prod-cat">Dino Collection</p>
+          <p class="prod-title">Dino Magnet 03</p>
           <div class="prod-foot">
-            <span class="prod-price">฿590</span>
+            <span class="prod-price">฿59</span>
           </div>
-          <button class="add-btn" data-name="Magnetic Car & Ramp Add-On" data-price="590"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+          <button class="add-btn" data-name="Dino Magnet 03" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
         </div>
       </div>
-      <div class="prod-card reveal d3" data-c="learning">
-        <div class="prod-img" style="background:#efe9df">
-          <span class="prod-badge">Bestseller</span>
+      <div class="prod-card reveal d1" data-c="dino">
+        <div class="prod-img" style="background:#e3ebe6">
+          <span class="prod-badge">Coming soon</span>
           <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
-          <i class="fa-solid fa-calculator"></i>
+          <i class="fa-solid fa-dragon"></i>
         </div>
         <div class="prod-body">
-          <p class="prod-cat">Letter &amp; Number</p>
-          <p class="prod-title">Numbers &amp; Maths Magnets</p>
-          <p class="prod-stars">★★★★★<span>(276)</span></p>
+          <p class="prod-cat">Dino Collection</p>
+          <p class="prod-title">Dino Magnet 04</p>
           <div class="prod-foot">
-            <span class="prod-price">฿350</span>
+            <span class="prod-price">฿59</span>
           </div>
-          <button class="add-btn" data-name="Numbers & Maths Magnets" data-price="350"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+          <button class="add-btn" data-name="Dino Magnet 04" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d2" data-c="unicorn">
+        <div class="prod-img" style="background:#efe9f2">
+          <span class="prod-badge">Coming soon</span>
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Unicorn Collection</p>
+          <p class="prod-title">Unicorn Magnet 01</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Unicorn Magnet 01" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d3" data-c="unicorn">
+        <div class="prod-img" style="background:#efe9f2">
+          <span class="prod-badge">Coming soon</span>
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Unicorn Collection</p>
+          <p class="prod-title">Unicorn Magnet 02</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Unicorn Magnet 02" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-c="unicorn">
+        <div class="prod-img" style="background:#efe9f2">
+          <span class="prod-badge">Coming soon</span>
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Unicorn Collection</p>
+          <p class="prod-title">Unicorn Magnet 03</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Unicorn Magnet 03" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+        </div>
+      </div>
+      <div class="prod-card reveal d1" data-c="unicorn">
+        <div class="prod-img" style="background:#efe9f2">
+          <span class="prod-badge">Coming soon</span>
+          <button class="prod-wish" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="prod-body">
+          <p class="prod-cat">Unicorn Collection</p>
+          <p class="prod-title">Unicorn Magnet 04</p>
+          <div class="prod-foot">
+            <span class="prod-price">฿59</span>
+          </div>
+          <button class="add-btn" data-name="Unicorn Magnet 04" data-price="59"><i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
         </div>
       </div>
 
@@ -1065,7 +1428,7 @@ function renderCart(){
   badge.textContent=t.count;
   for(var k in cart){
     var it=cart[k];
-    html+='<div class="ci"><div class="ci-thumb" style="background:'+it.bg+'"><i class="fa-solid '+it.icon+'"></i></div>'+
+    html+='<div class="ci"><div class="ci-thumb" style="background:'+it.bg+'">'+(it.img?'<img src="'+it.img+'" alt="">':'<i class="fa-solid '+it.icon+'"></i>')+'</div>'+
       '<div class="ci-info"><p class="ci-name"></p><p class="ci-price">'+baht(it.price)+' each</p>'+
       '<div class="qty"><button data-k="'+k+'" data-d="-1" aria-label="Decrease quantity">&minus;</button><span>'+it.qty+'</span>'+
       '<button data-k="'+k+'" data-d="1" aria-label="Increase quantity">+</button></div></div>'+
@@ -1089,8 +1452,9 @@ document.getElementById('cart-items').addEventListener('click',function(e){
 document.querySelectorAll('.add-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     var card=btn.closest('.prod-card'),k=btn.getAttribute('data-name');
+    var ico=card.querySelector('.prod-img > i'),img=card.querySelector('.prod-img > img');
     if(!cart[k]) cart[k]={name:k,price:parseInt(btn.getAttribute('data-price'),10)||0,qty:0,
-      icon:card.querySelector('.prod-img > i').className.split(' ').pop(),bg:card.querySelector('.prod-img').style.background};
+      icon:ico?ico.className.split(' ').pop():'',img:img?img.getAttribute('src'):'',bg:card.querySelector('.prod-img').style.background};
     cart[k].qty++;
     renderCart();
     badge.classList.add('bump');
