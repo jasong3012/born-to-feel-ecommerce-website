@@ -227,10 +227,10 @@ button{font-family:inherit}
 .hm-face{
   position:relative;border-radius:50%;transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry));
   box-shadow:0 5px 0 #ece7de,0 7px 0 rgba(0,0,0,.08),0 30px 40px -10px rgba(12,28,36,.6);
-  pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  pointer-events:auto;cursor:default;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
   transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .45s ease;
 }
-/* Hover: lift, straighten and come forward. Tap/click: quick "boing". */
+/* Hover (mouse): lift, straighten and come forward. Tap (touch only): quick "boing". Not clickable. */
 .hm:hover,.hm.tap{z-index:2}
 @media(hover:hover){
   .hm-face:hover{
@@ -245,7 +245,7 @@ button{font-family:inherit}
   65%{transform:rotate(calc(var(--r) - 4deg)) rotateX(6deg) rotateY(calc(var(--ry) / 2)) translateY(0) scale(.96)}
   100%{transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry)) scale(1)}
 }
-.hm-face img{display:block;width:100%;height:auto;border-radius:50%}
+.hm-face img{display:block;width:100%;height:auto;border-radius:50%;-webkit-user-drag:none;pointer-events:none}
 .hm-face::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
   background:linear-gradient(140deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 42%),radial-gradient(circle at 50% 120%,rgba(0,0,0,.12),rgba(0,0,0,0) 55%)}
 .hm-1{--s:46%;--x:0%;--y:22%;--r:-10deg;--ry:14deg;--d:1s}
@@ -2288,9 +2288,10 @@ function applyFilter(f,initial){
 }
 seeMore.addEventListener('click',function(){showMore(true)});
 
-// ── HERO MAGNETS: playful bounce on tap/click ──
+// ── HERO MAGNETS: playful bounce on touch taps (mouse clicks do nothing) ──
 document.querySelectorAll('.hm').forEach(function(m){
-  m.querySelector('.hm-face').addEventListener('pointerdown',function(){
+  m.querySelector('.hm-face').addEventListener('pointerdown',function(e){
+    if(e.pointerType==='mouse') return;
     m.classList.remove('tap');void m.offsetWidth;m.classList.add('tap');
   });
   m.addEventListener('animationend',function(e){if(e.animationName==='hmBoing') m.classList.remove('tap')});
