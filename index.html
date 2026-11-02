@@ -190,6 +190,23 @@ button{font-family:inherit}
 .hm-face{
   position:relative;border-radius:50%;transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry));
   box-shadow:0 5px 0 #ece7de,0 7px 0 rgba(0,0,0,.08),0 30px 40px -10px rgba(12,28,36,.6);
+  pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .45s ease;
+}
+/* Hover: lift, straighten and come forward. Tap/click: quick "boing". */
+.hm:hover,.hm.tap{z-index:2}
+@media(hover:hover){
+  .hm-face:hover{
+    transform:rotate(calc(var(--r) * .3)) rotateX(0) rotateY(0) translateY(-10px) scale(1.12);
+    box-shadow:0 6px 0 #ece7de,0 8px 0 rgba(0,0,0,.08),0 44px 50px -12px rgba(12,28,36,.55);
+  }
+}
+.hm.tap .hm-face{animation:hmBoing .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes hmBoing{
+  0%{transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry)) scale(1)}
+  35%{transform:rotate(calc(var(--r) + 8deg)) rotateX(0) rotateY(0) translateY(-14px) scale(1.18)}
+  65%{transform:rotate(calc(var(--r) - 4deg)) rotateX(6deg) rotateY(calc(var(--ry) / 2)) translateY(0) scale(.96)}
+  100%{transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry)) scale(1)}
 }
 .hm-face img{display:block;width:100%;height:auto;border-radius:50%}
 .hm-face::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
@@ -532,6 +549,8 @@ body.locked{overflow:hidden}
   .reveal{opacity:1;transform:none;transition:none}
   .hero-eyebrow,.hero-h1,.hero-sub,.hero-btns,.hero-trust{opacity:1;animation:none}
   .hm,.hm-float{opacity:1;animation:none}
+  .hm-face{transition:none}
+  .hm.tap .hm-face{animation:none}
   .hero-visual::after{animation:none}
 }
 </style>
@@ -2219,6 +2238,14 @@ function applyFilter(f,initial){
   shown=0;showMore(!initial);
 }
 seeMore.addEventListener('click',function(){showMore(true)});
+
+// ── HERO MAGNETS: playful bounce on tap/click ──
+document.querySelectorAll('.hm').forEach(function(m){
+  m.querySelector('.hm-face').addEventListener('pointerdown',function(){
+    m.classList.remove('tap');void m.offsetWidth;m.classList.add('tap');
+  });
+  m.addEventListener('animationend',function(e){if(e.animationName==='hmBoing') m.classList.remove('tap')});
+});
 applyFilter('all',true);
 document.querySelectorAll('.filter-btn').forEach(function(b){
   b.addEventListener('click',function(){applyFilter(b.getAttribute('data-f'))});
