@@ -498,7 +498,6 @@ button{font-family:inherit}
 
 /* ════ HOW TO PAY ════ */
 .pay{background:var(--warm-cream);padding:var(--sec) var(--gutter);border-bottom:1px solid var(--outline)}
-.story + .pay{border-top:1px solid var(--outline)}
 .pay-grid{display:grid;grid-template-columns:7fr 5fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
 @media(max-width:760px){.pay-grid{grid-template-columns:1fr}}
 .steps{display:flex;flex-direction:column;gap:1.25rem}
@@ -1842,33 +1841,6 @@ body.locked{overflow:hidden}
   </div>
 </section>
 
-<!-- ══════════ 4b. HOW TO PAY ══════════ -->
-<section class="pay" id="pay">
-  <div class="wrap">
-    <div class="pay-grid">
-      <div class="reveal">
-        <div class="accent-bar"></div>
-        <h2 class="h2">Scan, pay, done.</h2>
-        <p class="body-md" style="margin-bottom:2rem">We use PromptPay QR, so you can pay in seconds with K PLUS, SCB EASY, Krungthai NEXT, Bangkok Bank, TrueMoney or any Thai banking app. No card details, no sign-up.</p>
-        <div class="steps">
-          <div class="step"><span class="step-num">1</span><div><p class="step-title">Add to cart &amp; check out</p><p class="step-text">Pick your magnets and enter your delivery details.</p></div></div>
-          <div class="step"><span class="step-num">2</span><div><p class="step-title">Scan the QR code</p><p class="step-text">Your exact total is already in the QR. Just scan and confirm in your bank app.</p></div></div>
-          <div class="step"><span class="step-num">3</span><div><p class="step-title">Send us your slip on LINE</p><p class="step-text">Tap one button to send your order and payment slip. We ship within 24 hours.</p></div></div>
-        </div>
-      </div>
-      <div class="reveal d2">
-        <div class="pay-card">
-          <span class="pp-chip"><i class="fa-solid fa-qrcode"></i> PromptPay</span>
-          <div class="pay-qr-demo" aria-hidden="true"><i class="fa-solid fa-qrcode"></i></div>
-          <p class="pay-card-title">Thai QR Payment</p>
-          <p class="pay-card-text">Accepted by every major Thai bank</p>
-          <div class="bank-row"><span>KBank</span><span>SCB</span><span>KTB</span><span>BBL</span><span>Krungsri</span><span>TrueMoney</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ══════════ 5. WHY BORN TO FEEL ══════════ -->
 <section class="why" id="why">
   <div class="wrap">
@@ -1895,6 +1867,33 @@ body.locked{overflow:hidden}
         <p class="why-title">Fast Thai Delivery</p>
         <p class="why-sub">3-5 days · Easy returns</p>
         <p class="why-body">Shipped from Thailand with tracking. Not happy? Return within 30 days for a full refund.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 4b. HOW TO PAY ══════════ -->
+<section class="pay" id="pay">
+  <div class="wrap">
+    <div class="pay-grid">
+      <div class="reveal">
+        <div class="accent-bar"></div>
+        <h2 class="h2">Scan, pay, done.</h2>
+        <p class="body-md" style="margin-bottom:2rem">We use PromptPay QR, so you can pay in seconds with K PLUS, SCB EASY, Krungthai NEXT, Bangkok Bank, TrueMoney or any Thai banking app. No card details, no sign-up.</p>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span><div><p class="step-title">Add to cart &amp; check out</p><p class="step-text">Pick your magnets and enter your delivery details.</p></div></div>
+          <div class="step"><span class="step-num">2</span><div><p class="step-title">Scan the QR code</p><p class="step-text">Your exact total is already in the QR. Just scan and confirm in your bank app.</p></div></div>
+          <div class="step"><span class="step-num">3</span><div><p class="step-title">Send us your slip on LINE</p><p class="step-text">Tap one button to send your order and payment slip. We ship within 24 hours.</p></div></div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="pay-card">
+          <span class="pp-chip"><i class="fa-solid fa-qrcode"></i> PromptPay</span>
+          <div class="pay-qr-demo" aria-hidden="true"><i class="fa-solid fa-qrcode"></i></div>
+          <p class="pay-card-title">Thai QR Payment</p>
+          <p class="pay-card-text">Accepted by every major Thai bank</p>
+          <div class="bank-row"><span>KBank</span><span>SCB</span><span>KTB</span><span>BBL</span><span>Krungsri</span><span>TrueMoney</span></div>
+        </div>
       </div>
     </div>
   </div>
