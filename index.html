@@ -413,9 +413,9 @@ button{font-family:inherit}
 
 /* ════ 6. STORY ════ */
 .story{background:var(--warm-cream);padding:var(--sec) var(--gutter)}
-.story-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;max-width:var(--container);margin:0 auto}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;max-width:var(--container);margin:0 auto}
 @media(max-width:760px){.story-grid{grid-template-columns:1fr}}
-/* Placeholder brand image: replace with <img class="story-img" src="..."> */
+.story-photo{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 8px 32px rgba(39,65,77,.14)}
 .story-img{
   width:100%;aspect-ratio:4/5;border-radius:4px;box-shadow:0 8px 32px rgba(39,65,77,.1);
   background:linear-gradient(160deg,#dfe8ec 0%,#a7c1cd 55%,#58879d 100%);
@@ -479,6 +479,7 @@ button{font-family:inherit}
 .foot-grid{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem}
 @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
 .footer .logo{color:#fdfcf9}
+.footer .logo-foot img{width:64px;height:64px}
 .footer .logo span{color:#a7c1cd}
 .foot-brand p{margin:1rem 0 1.5rem;line-height:1.7;max-width:320px}
 .socials{display:flex;gap:.75rem}
@@ -1822,7 +1823,7 @@ body.locked{overflow:hidden}
 <section class="story" id="story">
   <div class="story-grid">
     <div class="reveal">
-      <div class="story-img" role="img" aria-label="Brand image placeholder"><i class="fa-solid fa-shapes"></i></div>
+      <img class="story-photo" src="media/how-to-play/feelings-chart.jpg" width="1440" height="1026" loading="lazy" alt="Feelings chart with 24 cat magnets under &quot;I am feeling…&quot; and &quot;I want to feel…&quot;, including Happy, Sad, Angry, Scared, Excited and Brave">
     </div>
     <div class="reveal d2">
       <div class="accent-bar"></div>
@@ -1969,7 +1970,7 @@ body.locked{overflow:hidden}
 <footer class="footer">
   <div class="foot-grid">
     <div class="foot-brand">
-      <a href="#" class="logo">Born<span>to</span>Feel</a>
+      <a href="#" class="logo logo-mark logo-foot"><img src="media/logo/born-to-feel-logo-red.svg" alt="Born to Feel" width="64" height="64"></a>
       <p>Colourful, child-safe magnetic toys for curious kids. Proudly shipping across Thailand.</p>
       <div class="socials">
         <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
