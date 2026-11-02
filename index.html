@@ -163,10 +163,42 @@ button{font-family:inherit}
 .hero-trust{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:2.5rem;font-size:13px;color:rgba(255,255,255,.7);opacity:0;animation:heroFadeUp .7s ease forwards .95s}
 .hero-trust i{color:#a7c1cd;margin-right:.4rem}
 @keyframes heroFadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+/* Hero magnets: 3D pop-in, then a gentle float (transform/opacity only) */
+.hero-magnets{
+  --ring:clamp(220px,28vw,360px);--box:clamp(280px,36vw,460px);
+  position:absolute;z-index:3;top:50%;right:calc(12% + (var(--ring) - var(--box)) / 2);
+  width:var(--box);aspect-ratio:1;transform:translateY(-50%);pointer-events:none;
+}
+.hm{position:absolute;width:var(--s);left:var(--x);top:var(--y);perspective:900px;
+  opacity:0;animation:hmPop .9s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:var(--d)}
+.hm-float{animation:hmFloat 6s ease-in-out infinite;animation-delay:calc(var(--d) + .9s);will-change:transform}
+.hm-face{
+  position:relative;border-radius:50%;transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry));
+  box-shadow:0 5px 0 #ece7de,0 7px 0 rgba(0,0,0,.08),0 30px 40px -10px rgba(12,28,36,.6);
+}
+.hm-face img{display:block;width:100%;height:auto;border-radius:50%}
+.hm-face::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:linear-gradient(140deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 42%),radial-gradient(circle at 50% 120%,rgba(0,0,0,.12),rgba(0,0,0,0) 55%)}
+.hm-1{--s:46%;--x:0%;--y:22%;--r:-10deg;--ry:14deg;--d:1s}
+.hm-2{--s:50%;--x:48%;--y:2%;--r:8deg;--ry:-14deg;--d:1.15s}
+.hm-3{--s:44%;--x:38%;--y:54%;--r:-3deg;--ry:-6deg;--d:1.3s}
+.hm-2 .hm-float{animation-duration:7s}
+.hm-3 .hm-float{animation-duration:5.5s}
+@keyframes hmPop{
+  0%{opacity:0;transform:translateY(40px) scale(.35)}
+  60%{opacity:1}
+  100%{opacity:1;transform:none}
+}
+@keyframes hmFloat{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-12px) rotate(2deg)}
+}
+@media(max-width:1000px) and (min-width:681px){.hero-magnets{--box:clamp(220px,30vw,300px);right:2%}}
 @media(max-width:680px){
   .hero{min-height:0;display:block}
   .hero-visual{position:relative;height:240px}
   .hero-visual::after{right:50%;transform:translate(50%,-50%);width:170px}
+  .hero-magnets{--box:196px;top:24px;right:50%;transform:translateX(50%)}
   .hero-overlay{display:none}
   .hero-inner{padding:2rem 1.25rem 3rem;background:var(--teal)}
   .hero-content{width:100%;max-width:100%}
@@ -266,6 +298,7 @@ button{font-family:inherit}
 .add-btn:hover{background:var(--teal-dark);transform:translateY(-1px)}
 .add-btn.added{background:var(--accent)}
 .prod-more{text-align:center;margin-top:3rem}
+.prod-more [hidden]{display:none}
 
 /* ════ 5. WHY / BENEFITS ════ */
 .why{background:var(--teal);padding:var(--sec) var(--gutter);position:relative;overflow:hidden}
@@ -457,6 +490,7 @@ body.locked{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
   .hero-eyebrow,.hero-h1,.hero-sub,.hero-btns,.hero-trust{opacity:1;animation:none}
+  .hm,.hm-float{opacity:1;animation:none}
 }
 </style>
 </head>
@@ -490,6 +524,11 @@ body.locked{overflow:hidden}
 <section class="hero">
   <div class="hero-visual"></div>
   <div class="hero-overlay"></div>
+  <div class="hero-magnets" aria-hidden="true">
+    <div class="hm hm-1"><div class="hm-float"><div class="hm-face"><img src="media/rabbit-category/magnet-circle_rabbit_01.png" alt="" width="591" height="591"></div></div></div>
+    <div class="hm hm-2"><div class="hm-float"><div class="hm-face"><img src="media/unicorn-category/magnet-circle_unicorn_05.png" alt="" width="591" height="591"></div></div></div>
+    <div class="hm hm-3"><div class="hm-float"><div class="hm-face"><img src="media/dino-category/magnet-circle_dino_06.png" alt="" width="591" height="591"></div></div></div>
+  </div>
   <div class="hero-inner">
     <div class="hero-content">
       <p class="label-sm hero-eyebrow">MAGNETIC PLAY · FOR CURIOUS KIDS</p>
@@ -1631,7 +1670,7 @@ body.locked{overflow:hidden}
       </div>
 
     </div>
-    <div class="prod-more reveal"><a href="#" class="btn-solid">VIEW ALL MAGNETS</a></div>
+    <div class="prod-more reveal"><button type="button" class="btn-solid" id="see-more" hidden>SEE MORE</button></div>
   </div>
 </section>
 
@@ -2074,14 +2113,39 @@ document.getElementById('paid-btn').addEventListener('click',function(){
 renderCart();
 
 // ── PRODUCT FILTER ──
-function applyFilter(f){
-  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-f')===f)});
-  document.querySelectorAll('.prod-card').forEach(function(c){
-    var show=f==='all'||c.getAttribute('data-c')===f;
-    c.classList.toggle('hide',!show);
-    if(show) c.classList.add('in');
-  });
+// "All" interleaves the collections card by card (Happy rabbit, Happy dino, Happy unicorn, Sad rabbit…).
+// Every view shows PAGE cards at first; "See more" reveals the next PAGE.
+var PAGE=16,COLLECTIONS=['rabbit','dino','unicorn'],LABELS={rabbit:'Rabbit',dino:'Dino',unicorn:'Unicorn'};
+var prodGrid=document.getElementById('prod-grid'),seeMore=document.getElementById('see-more');
+var byCol={},curList=[],shown=0,curFilter='all';
+COLLECTIONS.forEach(function(c){byCol[c]=[].slice.call(prodGrid.querySelectorAll('.prod-card[data-c="'+c+'"]'))});
+var mixed=[];
+for(var i=0,max=Math.max.apply(null,COLLECTIONS.map(function(c){return byCol[c].length}));i<max;i++){
+  COLLECTIONS.forEach(function(c){if(byCol[c][i]) mixed.push(byCol[c][i])});
 }
+function showMore(reveal){
+  var next=Math.min(shown+PAGE,curList.length);
+  for(var i=shown;i<next;i++){
+    var c=curList[i];
+    c.classList.remove('hide','d1','d2','d3');
+    if(i%4) c.classList.add('d'+(i%4));
+    if(reveal) c.classList.add('in');
+  }
+  shown=next;
+  var left=curList.length-shown;
+  seeMore.hidden=left===0;
+  seeMore.textContent='SEE MORE'+(curFilter==='all'?'':' '+LABELS[curFilter].toUpperCase())+' MAGNETS ('+left+')';
+}
+function applyFilter(f,initial){
+  curFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-f')===f)});
+  curList=f==='all'?mixed:byCol[f];
+  prodGrid.querySelectorAll('.prod-card').forEach(function(c){c.classList.add('hide')});
+  curList.forEach(function(c){prodGrid.appendChild(c)});
+  shown=0;showMore(!initial);
+}
+seeMore.addEventListener('click',function(){showMore(true)});
+applyFilter('all',true);
 document.querySelectorAll('.filter-btn').forEach(function(b){
   b.addEventListener('click',function(){applyFilter(b.getAttribute('data-f'))});
 });
