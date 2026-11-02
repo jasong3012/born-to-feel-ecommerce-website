@@ -98,9 +98,16 @@ button{font-family:inherit}
 .nav-inner{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);height:68px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
 .logo{font-size:20px;font-weight:900;letter-spacing:-.02em;color:var(--teal)}
 .logo span{font-weight:300;color:var(--accent)}
-.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
 .nav-links a{font-size:13px;font-weight:600;color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--teal)}
+.nav-links .nav-cta{
+  display:inline-flex;align-items:center;gap:.45rem;padding:8px 14px;border-radius:999px;
+  background:rgba(88,135,157,.12);border:1px solid rgba(88,135,157,.28);color:var(--teal);font-size:12px;font-weight:700;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.nav-links .nav-cta:hover{background:rgba(88,135,157,.2);border-color:rgba(88,135,157,.45);transform:translateY(-1px)}
+.nav-cta i{font-size:11px}
 .nav-icons{display:flex;align-items:center;gap:1.25rem;color:var(--teal);font-size:17px}
 .nav-icons button{background:none;border:none;color:inherit;font-size:inherit;cursor:pointer;position:relative;min-width:24px;min-height:24px}
 .cart-count{position:absolute;top:-8px;right:-10px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;transition:transform .25s}
@@ -110,7 +117,10 @@ button{font-family:inherit}
   .nav-links{display:none}
   .menu-btn{display:inline-block}
   .nav-links.open{display:flex;flex-direction:column;gap:0;position:absolute;top:68px;left:0;right:0;background:var(--off-white);border-bottom:1px solid var(--outline)}
+  .nav-links.open{align-items:stretch}
   .nav-links.open a{display:block;padding:1rem var(--gutter);border-top:1px solid var(--outline)}
+  .nav-links.open li:last-child{padding:1rem var(--gutter);border-top:1px solid var(--outline)}
+  .nav-links.open .nav-cta{display:inline-flex;padding:10px 16px;border-top:1px solid rgba(88,135,157,.28)}
 }
 
 /* ════ 1. HERO ════ */
@@ -501,12 +511,12 @@ body.locked{overflow:hidden}
   <div class="nav-inner">
     <a href="#" class="logo">Born<span>to</span>Feel</a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#shop">Shop</a></li>
       <li><a href="#collections">Collections</a></li>
-      <li><a href="#why">Why Us</a></li>
       <li><a href="#story">Our Story</a></li>
       <li><a href="#pay">How to Play</a></li>
       <li><a href="#reviews">Reviews</a></li>
+      <!-- TODO: point href at the magnet book file once it's uploaded -->
+      <li><a href="#" class="nav-cta"><i class="fa-solid fa-download"></i>Download Free Magnet Book</a></li>
     </ul>
     <div class="nav-icons">
       <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -536,7 +546,7 @@ body.locked{overflow:hidden}
         <a href="#collections" class="btn-ghost">SHOP BY AGE &amp; PLAY</a>
       </div>
       <div class="hero-trust">
-        <span><i class="fa-solid fa-truck-fast"></i>1–3 day delivery in Thailand</span>
+        <span><i class="fa-solid fa-truck-fast"></i>3-5 day delivery in Thailand</span>
         <span><i class="fa-solid fa-shield-heart"></i>Child-safe &amp; non-toxic</span>
         <span><i class="fa-solid fa-qrcode"></i>Pay by QR with any Thai bank app</span>
       </div>
@@ -1720,7 +1730,7 @@ body.locked{overflow:hidden}
       <div class="why-card reveal d3">
         <div class="why-icon"><i class="fa-solid fa-truck-fast"></i></div>
         <p class="why-title">Fast Thai Delivery</p>
-        <p class="why-sub">1–3 days · Easy returns</p>
+        <p class="why-sub">3-5 days · Easy returns</p>
         <p class="why-body">Shipped from Thailand with tracking. Not happy? Return within 30 days for a full refund.</p>
       </div>
     </div>
