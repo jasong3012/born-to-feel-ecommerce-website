@@ -127,12 +127,17 @@ button{font-family:inherit}
     radial-gradient(circle at 70% 65%,rgba(88,135,157,.55) 0,rgba(88,135,157,0) 45%),
     linear-gradient(135deg,#3b6273 0%,#58879d 55%,#a7c1cd 100%);
 }
+/* Ring behind the hero magnets: a brighter arc + glowing dot make the slow spin visible */
 .hero-visual::after{
-  content:'';position:absolute;right:12%;top:50%;transform:translateY(-50%);
+  --ring-pos:translateY(-50%);
+  content:'';position:absolute;right:12%;top:50%;transform:var(--ring-pos);
   width:clamp(220px,28vw,360px);aspect-ratio:1;border-radius:50%;
-  border:1px solid rgba(253,252,249,.35);
+  border:1px solid rgba(253,252,249,.35);border-top-color:rgba(253,252,249,.85);border-right-color:rgba(253,252,249,.6);
+  background:radial-gradient(circle at 85.4% 14.6%,#fdfcf9 0 3px,rgba(253,252,249,.35) 4px,rgba(253,252,249,0) 9px);
   box-shadow:0 0 0 40px rgba(253,252,249,.05),0 0 0 90px rgba(253,252,249,.04);
+  animation:ringSpin 40s linear infinite;will-change:transform;
 }
+@keyframes ringSpin{from{transform:var(--ring-pos) rotate(0)}to{transform:var(--ring-pos) rotate(360deg)}}
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
   background:linear-gradient(90deg,
@@ -197,7 +202,7 @@ button{font-family:inherit}
 @media(max-width:680px){
   .hero{min-height:0;display:block}
   .hero-visual{position:relative;height:240px}
-  .hero-visual::after{right:50%;transform:translate(50%,-50%);width:170px}
+  .hero-visual::after{--ring-pos:translate(50%,-50%);right:50%;width:170px}
   .hero-magnets{--box:196px;top:24px;right:50%;transform:translateX(50%)}
   .hero-overlay{display:none}
   .hero-inner{padding:2rem 1.25rem 3rem;background:var(--teal)}
@@ -491,6 +496,7 @@ body.locked{overflow:hidden}
   .reveal{opacity:1;transform:none;transition:none}
   .hero-eyebrow,.hero-h1,.hero-sub,.hero-btns,.hero-trust{opacity:1;animation:none}
   .hm,.hm-float{opacity:1;animation:none}
+  .hero-visual::after{animation:none}
 }
 </style>
 </head>
