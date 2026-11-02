@@ -98,9 +98,16 @@ button{font-family:inherit}
 .nav-inner{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);height:68px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
 .logo{font-size:20px;font-weight:900;letter-spacing:-.02em;color:var(--teal)}
 .logo span{font-weight:300;color:var(--accent)}
-.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
 .nav-links a{font-size:13px;font-weight:600;color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--teal)}
+.nav-links .nav-cta{
+  display:inline-flex;align-items:center;gap:.45rem;padding:8px 14px;border-radius:999px;
+  background:rgba(88,135,157,.12);border:1px solid rgba(88,135,157,.28);color:var(--teal);font-size:12px;font-weight:700;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.nav-links .nav-cta:hover{background:rgba(88,135,157,.2);border-color:rgba(88,135,157,.45);transform:translateY(-1px)}
+.nav-cta i{font-size:11px}
 .nav-icons{display:flex;align-items:center;gap:1.25rem;color:var(--teal);font-size:17px}
 .nav-icons button{background:none;border:none;color:inherit;font-size:inherit;cursor:pointer;position:relative;min-width:24px;min-height:24px}
 .cart-count{position:absolute;top:-8px;right:-10px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;transition:transform .25s}
@@ -110,7 +117,10 @@ button{font-family:inherit}
   .nav-links{display:none}
   .menu-btn{display:inline-block}
   .nav-links.open{display:flex;flex-direction:column;gap:0;position:absolute;top:68px;left:0;right:0;background:var(--off-white);border-bottom:1px solid var(--outline)}
+  .nav-links.open{align-items:stretch}
   .nav-links.open a{display:block;padding:1rem var(--gutter);border-top:1px solid var(--outline)}
+  .nav-links.open li:last-child{padding:1rem var(--gutter);border-top:1px solid var(--outline)}
+  .nav-links.open .nav-cta{display:inline-flex;padding:10px 16px;border-top:1px solid rgba(88,135,157,.28)}
 }
 
 /* ════ 1. HERO ════ */
@@ -127,12 +137,17 @@ button{font-family:inherit}
     radial-gradient(circle at 70% 65%,rgba(88,135,157,.55) 0,rgba(88,135,157,0) 45%),
     linear-gradient(135deg,#3b6273 0%,#58879d 55%,#a7c1cd 100%);
 }
+/* Ring behind the hero magnets: a brighter arc + glowing dot make the slow spin visible */
 .hero-visual::after{
-  content:'';position:absolute;right:12%;top:50%;transform:translateY(-50%);
+  --ring-pos:translateY(-50%);
+  content:'';position:absolute;right:12%;top:50%;transform:var(--ring-pos);
   width:clamp(220px,28vw,360px);aspect-ratio:1;border-radius:50%;
-  border:1px solid rgba(253,252,249,.35);
+  border:1px solid rgba(253,252,249,.35);border-top-color:rgba(253,252,249,.85);border-right-color:rgba(253,252,249,.6);
+  background:radial-gradient(circle at 85.4% 14.6%,#fdfcf9 0 3px,rgba(253,252,249,.35) 4px,rgba(253,252,249,0) 9px);
   box-shadow:0 0 0 40px rgba(253,252,249,.05),0 0 0 90px rgba(253,252,249,.04);
+  animation:ringSpin 40s linear infinite;will-change:transform;
 }
+@keyframes ringSpin{from{transform:var(--ring-pos) rotate(0)}to{transform:var(--ring-pos) rotate(360deg)}}
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
   background:linear-gradient(90deg,
@@ -197,7 +212,7 @@ button{font-family:inherit}
 @media(max-width:680px){
   .hero{min-height:0;display:block}
   .hero-visual{position:relative;height:240px}
-  .hero-visual::after{right:50%;transform:translate(50%,-50%);width:170px}
+  .hero-visual::after{--ring-pos:translate(50%,-50%);right:50%;width:170px}
   .hero-magnets{--box:196px;top:24px;right:50%;transform:translateX(50%)}
   .hero-overlay{display:none}
   .hero-inner{padding:2rem 1.25rem 3rem;background:var(--teal)}
@@ -213,6 +228,7 @@ button{font-family:inherit}
 .stat-col{padding:0 1.5rem}
 .stat-col+.stat-col{border-left:1px solid var(--outline)}
 .stat-num{font-size:clamp(34px,4.5vw,48px);font-weight:800;line-height:1.1;color:var(--teal);margin-bottom:.4rem}
+.stat-star{color:var(--gold)}
 .stat-desc{font-size:14px;color:var(--muted);line-height:1.55;max-width:160px;margin:0 auto}
 @media(max-width:760px){
   .stats-grid{grid-template-columns:1fr 1fr;row-gap:2rem}
@@ -237,6 +253,32 @@ button{font-family:inherit}
 .cat-card:hover .cat-bg{transform:scale(1.05)}
 .cat-bg i{position:absolute;top:2rem;right:2rem;font-size:64px;color:rgba(253,252,249,.18)}
 .cat-img{position:absolute;top:1.5rem;right:1.5rem;width:140px;height:140px;object-fit:contain}
+/* Playful mascots: subtle, transform-only loops */
+.cat-anim{position:absolute;top:1.5rem;left:1.5rem;width:76px;height:76px;overflow:visible;opacity:.4}
+.cat-anim *{fill:#fdfcf9}
+.cat-anim .ca-eye{fill:#27414d}
+.cat-anim .ca-shadow{fill:#14242c;opacity:.45;transform-box:fill-box;transform-origin:center}
+.cat-anim g,.cat-anim .ca-spark{transform-box:fill-box}
+.ca-rabbit .ca-body{transform-origin:50% 100%;animation:caHop 2.4s cubic-bezier(.45,0,.55,1) infinite}
+.ca-rabbit .ca-shadow{animation:caShadow 2.4s cubic-bezier(.45,0,.55,1) infinite}
+.ca-rabbit .ca-ear-l{transform-origin:50% 100%;animation:caEar 2.4s ease-in-out infinite}
+.ca-rabbit .ca-ear-r{transform-origin:50% 100%;animation:caEar 2.4s ease-in-out infinite .15s}
+@keyframes caHop{0%,55%,100%{transform:translateY(0) scale(1,1)}10%{transform:translateY(0) scale(1.06,.92)}30%{transform:translateY(-9px) scale(.97,1.04)}48%{transform:translateY(0) scale(1.04,.95)}}
+@keyframes caShadow{0%,55%,100%{transform:scale(1);opacity:1}30%{transform:scale(.6);opacity:.5}}
+@keyframes caEar{0%,100%{transform:rotate(0)}30%{transform:rotate(-10deg)}45%{transform:rotate(6deg)}}
+.ca-dino .ca-neck{transform-origin:10% 95%;animation:caNeck 3.2s ease-in-out infinite}
+.ca-dino .ca-tail{transform-origin:100% 60%;animation:caTail 1.6s ease-in-out infinite}
+@keyframes caNeck{0%,100%{transform:rotate(0)}25%{transform:rotate(-7deg)}50%{transform:rotate(3deg)}75%{transform:rotate(-4deg)}}
+@keyframes caTail{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
+.ca-unicorn .ca-body{transform-origin:30% 100%;animation:caPrance 2.8s ease-in-out infinite}
+.ca-unicorn .ca-mane{transform-origin:80% 0;animation:caFlutter 1.4s ease-in-out infinite}
+.ca-unicorn .ca-mane-tail{transform-origin:100% 20%;animation:caFlutter 1.4s ease-in-out infinite .3s}
+.ca-unicorn .ca-spark{transform-origin:center;animation:caTwinkle 2.8s ease-in-out infinite}
+.ca-unicorn .ca-spark-2{animation-delay:1.1s}
+@keyframes caPrance{0%,100%{transform:rotate(0) translateY(0)}35%{transform:rotate(-6deg) translateY(-3px)}60%{transform:rotate(1deg) translateY(0)}}
+@keyframes caFlutter{0%,100%{transform:rotate(0)}50%{transform:rotate(12deg)}}
+@keyframes caTwinkle{0%,100%{transform:scale(.4) rotate(0);opacity:.2}45%{transform:scale(1.15) rotate(45deg);opacity:1}}
+@media(prefers-reduced-motion:reduce){.cat-anim *{animation:none!important}}
 .cat-card::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(29,50,60,0) 35%,rgba(29,50,60,.85) 100%)}
 .cat-body{position:relative;z-index:2}
 .cat-sub{color:rgba(253,252,249,.75);margin-bottom:.4rem;display:block}
@@ -302,7 +344,6 @@ button{font-family:inherit}
 
 /* ════ 5. WHY / BENEFITS ════ */
 .why{background:var(--teal);padding:var(--sec) var(--gutter);position:relative;overflow:hidden}
-.why-label{color:rgba(253,252,249,.75);display:block;margin-bottom:.4rem}
 .why-line{width:60px;height:2px;background:rgba(253,252,249,.35);margin:1.2rem 0}
 .why-h2{font-size:clamp(24px,3.5vw,34px);font-weight:900;color:#fdfcf9}
 .why-intro{font-size:16px;line-height:1.8;color:rgba(253,252,249,.65);max-width:560px;margin:.75rem 0 3.5rem}
@@ -329,6 +370,14 @@ button{font-family:inherit}
 .story-img i{font-size:72px;color:rgba(253,252,249,.7)}
 .blockquote{border-left:4px solid var(--accent);padding-left:1.5rem;margin:1.75rem 0;font-size:clamp(17px,2.1vw,21px);font-weight:500;line-height:1.5;color:var(--teal)}
 .check-list{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-bottom:2rem}
+/* Light pill CTA, same look as the nav's book button */
+.book-cta{
+  display:flex;width:fit-content;align-items:center;gap:.55rem;margin-bottom:1.5rem;padding:12px 20px;border-radius:999px;
+  background:rgba(88,135,157,.12);border:1px solid rgba(88,135,157,.28);color:var(--teal);font-size:13px;font-weight:700;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.book-cta:hover{background:rgba(88,135,157,.2);border-color:rgba(88,135,157,.45);transform:translateY(-1px)}
+.book-cta i{font-size:12px}
 .check-item{display:flex;align-items:flex-start;gap:.75rem;font-size:15.5px;color:var(--text)}
 .check-icon{color:var(--accent);font-size:17px;flex-shrink:0;margin-top:2px}
 
@@ -354,14 +403,6 @@ button{font-family:inherit}
 .t-dots{display:flex;gap:6px;align-items:center}
 .t-dot{width:8px;height:8px;border-radius:50%;background:#E8E4DC;border:none;cursor:pointer;padding:0;transition:all .2s}
 .t-dot.on{width:10px;height:10px;background:var(--teal)}
-
-/* ════ 8. PULLQUOTE ════ */
-.pullquote{background:var(--warm-cream);padding:clamp(52px,8vw,96px) var(--gutter)}
-.pq-box{max-width:680px;margin:0 auto;text-align:center;background:var(--off-white);padding:clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem);position:relative;box-shadow:0 2px 32px rgba(39,65,77,.06)}
-.pq-box::before,.pq-box::after{content:'';position:absolute;left:2.5rem;right:2.5rem;height:2px;background:linear-gradient(90deg,transparent,rgba(88,135,157,.32),transparent)}
-.pq-box::before{top:0}.pq-box::after{bottom:0}
-.pq-deco{font-size:36px;color:rgba(88,135,157,.18);display:block;margin-bottom:1.5rem}
-.pq-text{font-size:clamp(17px,2.2vw,22px);font-weight:500;line-height:1.55;color:var(--teal)}
 
 /* ════ 9. NEWSLETTER CTA ════ */
 .cta{background:var(--teal);color:#fdfcf9;padding:var(--sec) var(--gutter);text-align:center}
@@ -491,6 +532,7 @@ body.locked{overflow:hidden}
   .reveal{opacity:1;transform:none;transition:none}
   .hero-eyebrow,.hero-h1,.hero-sub,.hero-btns,.hero-trust{opacity:1;animation:none}
   .hm,.hm-float{opacity:1;animation:none}
+  .hero-visual::after{animation:none}
 }
 </style>
 </head>
@@ -504,12 +546,12 @@ body.locked{overflow:hidden}
   <div class="nav-inner">
     <a href="#" class="logo">Born<span>to</span>Feel</a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#shop">Shop</a></li>
       <li><a href="#collections">Collections</a></li>
-      <li><a href="#why">Why Us</a></li>
       <li><a href="#story">Our Story</a></li>
-      <li><a href="#pay">How to Pay</a></li>
+      <li><a href="#pay">How to Play</a></li>
       <li><a href="#reviews">Reviews</a></li>
+      <!-- TODO: point href at the magnet book file once it's uploaded -->
+      <li><a href="#" class="nav-cta"><i class="fa-solid fa-download"></i>Download Free Magnet Book</a></li>
     </ul>
     <div class="nav-icons">
       <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -531,15 +573,15 @@ body.locked{overflow:hidden}
   </div>
   <div class="hero-inner">
     <div class="hero-content">
-      <p class="label-sm hero-eyebrow">MAGNETIC PLAY · FOR CURIOUS KIDS</p>
+      <p class="label-sm hero-eyebrow">MAGNETIC PLAY FOR CURIOUS KIDS</p>
       <h1 class="hero-h1">Play They Can Feel.</h1>
       <p class="hero-sub">Colourful, child-safe magnetic toys that spark creativity, build little hands and minds, and stick around for years of play.</p>
       <div class="hero-btns">
-        <a href="#shop" class="btn-light">SHOP MAGNETS</a>
+        <a href="#shop" class="btn-light">HOW TO USE</a>
         <a href="#collections" class="btn-ghost">SHOP BY AGE &amp; PLAY</a>
       </div>
       <div class="hero-trust">
-        <span><i class="fa-solid fa-truck-fast"></i>1–3 day delivery in Thailand</span>
+        <span><i class="fa-solid fa-truck-fast"></i>3-5 day delivery in Thailand</span>
         <span><i class="fa-solid fa-shield-heart"></i>Child-safe &amp; non-toxic</span>
         <span><i class="fa-solid fa-qrcode"></i>Pay by QR with any Thai bank app</span>
       </div>
@@ -553,10 +595,10 @@ body.locked{overflow:hidden}
   <div class="stats-grid">
     <div class="stat-col reveal">
       <div class="stat-num">70+</div>
-      <p class="stat-desc">magnet variations</p>
+      <p class="stat-desc">magnet variations available</p>
     </div>
     <div class="stat-col reveal d2">
-      <div class="stat-num">4.9★</div>
+      <div class="stat-num">4.9<span class="stat-star">★</span></div>
       <p class="stat-desc">average rating from parents</p>
     </div>
     <div class="stat-col reveal d3">
@@ -575,7 +617,6 @@ body.locked{overflow:hidden}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="label-sm section-label reveal">01 · COLLECTIONS</span>
         <div class="accent-bar reveal d1"></div>
         <h2 class="h2 reveal d2">Shop by the way they play.</h2>
       </div>
@@ -583,7 +624,19 @@ body.locked{overflow:hidden}
     </div>
     <div class="cat-grid">
       <a href="#shop" class="cat-card reveal" data-goto="rabbit">
-        <div class="cat-bg" style="background:linear-gradient(150deg,#e7a9b8 0%,#27414d 100%)"><img class="cat-img" src="media/rabbit-category/magnet-circle_rabbit_01.png" alt="" width="591" height="591"></div>
+        <div class="cat-bg" style="background:linear-gradient(150deg,#e7a9b8 0%,#27414d 100%)"><svg class="cat-anim ca-rabbit" viewBox="0 0 64 64" aria-hidden="true">
+            <ellipse class="ca-shadow" cx="32" cy="60" rx="14" ry="2.5"/>
+            <g class="ca-body">
+              <g class="ca-ear-l"><ellipse cx="41" cy="13" rx="3.6" ry="10" transform="rotate(-14 41 13)"/></g>
+              <g class="ca-ear-r"><ellipse cx="48" cy="14" rx="3.6" ry="10" transform="rotate(16 48 14)"/></g>
+              <ellipse cx="29" cy="43" rx="16" ry="12"/>
+              <circle cx="44" cy="29" r="9.5"/>
+              <circle cx="13.5" cy="40" r="4.5"/>
+              <ellipse cx="38" cy="55" rx="7" ry="3"/>
+              <circle class="ca-eye" cx="47.5" cy="27.5" r="1.5"/>
+              <circle class="ca-eye" cx="53" cy="31" r="1"/>
+            </g>
+          </svg><img class="cat-img" src="media/rabbit-category/magnet-circle_rabbit_01.png" alt="" width="591" height="591"></div>
         <div class="cat-body">
           <span class="label-sm cat-sub">Feelings &amp; Emotions</span>
           <p class="cat-title">Rabbit Collection</p>
@@ -591,7 +644,18 @@ body.locked{overflow:hidden}
         </div>
       </a>
       <a href="#shop" class="cat-card reveal d2" data-goto="dino">
-        <div class="cat-bg" style="background:linear-gradient(150deg,#8fb59d 0%,#27414d 100%)"><img class="cat-img" src="media/dino-category/magnet-circle_dino_01.png" alt="" width="591" height="591"></div>
+        <div class="cat-bg" style="background:linear-gradient(150deg,#8fb59d 0%,#27414d 100%)"><svg class="cat-anim ca-dino" viewBox="0 0 64 64" aria-hidden="true">
+            <ellipse class="ca-shadow" cx="30" cy="60" rx="18" ry="2.5"/>
+            <g class="ca-tail"><path d="M16 42 Q6 42 3 32 Q10 38 18 36 Z"/></g>
+            <rect x="18" y="45" width="6" height="12" rx="3"/><rect x="34" y="45" width="6" height="12" rx="3"/>
+            <ellipse cx="29" cy="41" rx="15" ry="10"/>
+            <path class="ca-spikes" d="M20 32 l3 -5 l3 5 Z M27 31 l3 -5 l3 5 Z"/>
+            <g class="ca-neck">
+              <path d="M37 38 Q42 24 46 15 L53 17 Q47 28 44 40 Z"/>
+              <ellipse cx="51" cy="14" rx="7" ry="5.5"/>
+              <circle class="ca-eye" cx="52.5" cy="12.5" r="1.3"/>
+            </g>
+          </svg><img class="cat-img" src="media/dino-category/magnet-circle_dino_06.png" alt="" width="591" height="591"></div>
         <div class="cat-body">
           <span class="label-sm cat-sub">Roar &amp; Explore</span>
           <p class="cat-title">Dino Collection</p>
@@ -599,7 +663,21 @@ body.locked{overflow:hidden}
         </div>
       </a>
       <a href="#shop" class="cat-card reveal d3" data-goto="unicorn">
-        <div class="cat-bg" style="background:linear-gradient(150deg,#b9a3cf 0%,#315869 100%)"><img class="cat-img" src="media/unicorn-category/magnet-circle_unicorn_01.png" alt="" width="591" height="591"></div>
+        <div class="cat-bg" style="background:linear-gradient(150deg,#b9a3cf 0%,#315869 100%)"><svg class="cat-anim ca-unicorn" viewBox="0 0 64 64" aria-hidden="true">
+            <ellipse class="ca-shadow" cx="30" cy="60" rx="17" ry="2.5"/>
+            <path class="ca-spark ca-spark-1" d="M58 4 l1.2 3 l3 1.2 l-3 1.2 l-1.2 3 l-1.2 -3 l-3 -1.2 l3 -1.2 Z"/>
+            <path class="ca-spark ca-spark-2" d="M44 2 l.8 2 l2 .8 l-2 .8 l-.8 2 l-.8 -2 l-2 -.8 l2 -.8 Z"/>
+            <g class="ca-body">
+              <g class="ca-mane-tail"><path d="M16 36 Q6 34 5 46 Q10 40 16 42 Z"/></g>
+              <rect x="18" y="42" width="5" height="14" rx="2.5"/><rect x="36" y="42" width="5" height="14" rx="2.5"/>
+              <ellipse cx="29" cy="38" rx="15" ry="9"/>
+              <path d="M36 36 L42 20 Q44 15 49 16 L56 22 Q58 25 55 27 L49 26 L46 38 Z"/>
+              <path d="M47 16 L51 4 L51.5 17 Z"/>
+              <path d="M44 16 L46 11 L47.5 16.5 Z"/>
+              <g class="ca-mane"><path d="M42 18 Q37 22 39 27 Q35 28 37 33 Q41 30 43 24 Z"/></g>
+              <circle class="ca-eye" cx="50" cy="20.5" r="1.3"/>
+            </g>
+          </svg><img class="cat-img" src="media/unicorn-category/magnet-circle_unicorn_04.png" alt="" width="591" height="591"></div>
         <div class="cat-body">
           <span class="label-sm cat-sub">Dream &amp; Imagine</span>
           <p class="cat-title">Unicorn Collection</p>
@@ -615,7 +693,6 @@ body.locked{overflow:hidden}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="label-sm section-label reveal">02 · BESTSELLERS</span>
         <div class="accent-bar reveal d1"></div>
         <h2 class="h2 reveal d2" style="margin-bottom:0">Kids' favourite magnets.</h2>
       </div>
@@ -1679,7 +1756,6 @@ body.locked{overflow:hidden}
   <div class="wrap">
     <div class="pay-grid">
       <div class="reveal">
-        <span class="label-sm section-label">03 · EASY QR PAYMENT</span>
         <div class="accent-bar"></div>
         <h2 class="h2">Scan, pay, done.</h2>
         <p class="body-md" style="margin-bottom:2rem">We use PromptPay QR, so you can pay in seconds with K PLUS, SCB EASY, Krungthai NEXT, Bangkok Bank, TrueMoney or any Thai banking app. No card details, no sign-up.</p>
@@ -1706,7 +1782,6 @@ body.locked{overflow:hidden}
 <section class="why" id="why">
   <div class="wrap">
     <div class="reveal">
-      <span class="label-sm why-label">04 · WHY BORN TO FEEL</span>
       <div class="why-line"></div>
       <h2 class="why-h2">Safe for them. Easy for you.</h2>
       <p class="why-intro">Every magnet set is chosen with parents in mind: safe materials, real learning value, and play that keeps kids busy away from screens.</p>
@@ -1727,7 +1802,7 @@ body.locked{overflow:hidden}
       <div class="why-card reveal d3">
         <div class="why-icon"><i class="fa-solid fa-truck-fast"></i></div>
         <p class="why-title">Fast Thai Delivery</p>
-        <p class="why-sub">1–3 days · Easy returns</p>
+        <p class="why-sub">3-5 days · Easy returns</p>
         <p class="why-body">Shipped from Thailand with tracking. Not happy? Return within 30 days for a full refund.</p>
       </div>
     </div>
@@ -1741,16 +1816,17 @@ body.locked{overflow:hidden}
       <div class="story-img" role="img" aria-label="Brand image placeholder"><i class="fa-solid fa-shapes"></i></div>
     </div>
     <div class="reveal d2">
-      <span class="label-sm section-label">05 · OUR STORY</span>
       <div class="accent-bar"></div>
-      <h2 class="h2">Every child is born to feel curious.</h2>
-      <p class="body-md">Born to Feel started at a kitchen table in Thailand, watching kids light up as they snapped magnets together. We wanted toys that feel good to hold, are safe enough to trust, and open up endless ways to play and learn.</p>
+      <h2 class="h2">How to Play</h2>
+      <p class="body-md">Each page to have illustrations with the 12 emotions for kids to label. There has to be a picture of a situation and a circle next to it where kids can put a magnet with an emotion that they feel describes best the situation.</p>
       <div class="blockquote">The best toys don't do the playing. They let kids discover it for themselves.</div>
       <ul class="check-list">
         <li class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>Tested for strength, durability and safety</span></li>
         <li class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>Works with most major magnetic tile brands</span></li>
         <li class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>Gift-ready packaging on every order</span></li>
       </ul>
+      <!-- TODO: point href at the magnet book file once it's uploaded -->
+      <a href="#" class="book-cta"><i class="fa-solid fa-download"></i>Download your free magnet book</a>
       <a href="#" class="link-arrow">Read our full story <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
@@ -1760,7 +1836,7 @@ body.locked{overflow:hidden}
 <section class="testimonials" id="reviews">
   <div class="wrap">
     <h2 class="h2 t-heading reveal">What Parents Say</h2>
-    <p class="t-rating reveal d1"><span class="t-stars">★★★★★</span>4.9 out of 5 from 1,800+ reviews</p>
+    <p class="t-rating reveal d1"><span class="t-stars">★★★★★</span>4.9 out of 5 from happy families</p>
     <div class="t-outer reveal d2">
 
       <div class="t-card t-active">
@@ -1805,14 +1881,6 @@ body.locked{overflow:hidden}
         <button class="t-arrow" id="t-next" aria-label="Next review"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ══════════ 8. PULLQUOTE ══════════ -->
-<section class="pullquote">
-  <div class="pq-box reveal">
-    <i class="fa-solid fa-magnet pq-deco"></i>
-    <p class="pq-text">Kids are born to feel, touch, build and explore. We just make the pieces that help them do it.</p>
   </div>
 </section>
 
@@ -2119,10 +2187,16 @@ var PAGE=16,COLLECTIONS=['rabbit','dino','unicorn'],LABELS={rabbit:'Rabbit',dino
 var prodGrid=document.getElementById('prod-grid'),seeMore=document.getElementById('see-more');
 var byCol={},curList=[],shown=0,curFilter='all';
 COLLECTIONS.forEach(function(c){byCol[c]=[].slice.call(prodGrid.querySelectorAll('.prod-card[data-c="'+c+'"]'))});
+// In "All", these feelings lead; the rest follow in collection order.
+var FEELING_ORDER=['Happy','Excited','Brave','Angry','Sad'];
+function feelingOf(card){return card.querySelector('.prod-title').textContent.split(': ').pop()}
+var feelings=[];
+COLLECTIONS.forEach(function(c){byCol[c].forEach(function(card){var f=feelingOf(card);if(feelings.indexOf(f)<0) feelings.push(f)})});
+feelings=FEELING_ORDER.concat(feelings.filter(function(f){return FEELING_ORDER.indexOf(f)<0}));
 var mixed=[];
-for(var i=0,max=Math.max.apply(null,COLLECTIONS.map(function(c){return byCol[c].length}));i<max;i++){
-  COLLECTIONS.forEach(function(c){if(byCol[c][i]) mixed.push(byCol[c][i])});
-}
+feelings.forEach(function(f){
+  COLLECTIONS.forEach(function(c){byCol[c].forEach(function(card){if(feelingOf(card)===f) mixed.push(card)})});
+});
 function showMore(reveal){
   var next=Math.min(shown+PAGE,curList.length);
   for(var i=shown;i<next;i++){
