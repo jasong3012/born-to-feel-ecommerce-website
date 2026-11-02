@@ -2119,10 +2119,16 @@ var PAGE=16,COLLECTIONS=['rabbit','dino','unicorn'],LABELS={rabbit:'Rabbit',dino
 var prodGrid=document.getElementById('prod-grid'),seeMore=document.getElementById('see-more');
 var byCol={},curList=[],shown=0,curFilter='all';
 COLLECTIONS.forEach(function(c){byCol[c]=[].slice.call(prodGrid.querySelectorAll('.prod-card[data-c="'+c+'"]'))});
+// In "All", these feelings lead; the rest follow in collection order.
+var FEELING_ORDER=['Happy','Excited','Brave','Angry','Sad'];
+function feelingOf(card){return card.querySelector('.prod-title').textContent.split(': ').pop()}
+var feelings=[];
+COLLECTIONS.forEach(function(c){byCol[c].forEach(function(card){var f=feelingOf(card);if(feelings.indexOf(f)<0) feelings.push(f)})});
+feelings=FEELING_ORDER.concat(feelings.filter(function(f){return FEELING_ORDER.indexOf(f)<0}));
 var mixed=[];
-for(var i=0,max=Math.max.apply(null,COLLECTIONS.map(function(c){return byCol[c].length}));i<max;i++){
-  COLLECTIONS.forEach(function(c){if(byCol[c][i]) mixed.push(byCol[c][i])});
-}
+feelings.forEach(function(f){
+  COLLECTIONS.forEach(function(c){byCol[c].forEach(function(card){if(feelingOf(card)===f) mixed.push(card)})});
+});
 function showMore(reveal){
   var next=Math.min(shown+PAGE,curList.length);
   for(var i=shown;i<next;i++){
