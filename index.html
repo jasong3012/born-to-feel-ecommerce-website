@@ -405,8 +405,9 @@ button{font-family:inherit}
 @media(max-width:760px){.why-grid{grid-template-columns:1fr}}
 .why-card{background:#fff;border-radius:12px;padding:1.75rem;box-shadow:0 2px 12px rgba(0,0,0,.07);transition:box-shadow .3s,transform .3s}
 .why-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.13);transform:translateY(-4px)}
-.why-icon{width:52px;height:52px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
-.why-icon i{color:#fff;font-size:18px}
+.why-icon{width:64px;height:64px;border-radius:50%;margin-bottom:1.25rem;box-shadow:0 3px 0 #ece7de,0 8px 16px -4px rgba(39,65,77,.35);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.why-icon img{display:block;width:100%;height:100%;border-radius:50%}
+.why-card:hover .why-icon{transform:rotate(-8deg) scale(1.08)}
 .why-title{font-size:17px;font-weight:800;line-height:1.35;color:var(--teal);margin-bottom:.3rem}
 .why-sub{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .why-body{font-size:14px;font-weight:300;line-height:1.7;color:rgba(44,44,44,.68)}
@@ -1851,19 +1852,19 @@ body.locked{overflow:hidden}
     </div>
     <div class="why-grid">
       <div class="why-card reveal">
-        <div class="why-icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <div class="why-icon"><img src="media/rabbit-category/magnet-circle_rabbit_01.png" alt="Rabbit Happy magnet" width="64" height="64" loading="lazy"></div>
         <p class="why-title">Child-Safe by Design</p>
         <p class="why-sub">BPA-free · Sealed magnets</p>
         <p class="why-body">Non-toxic ABS plastic, rounded edges and magnets fully sealed inside every piece, so little hands stay safe.</p>
       </div>
       <div class="why-card reveal d2">
-        <div class="why-icon"><i class="fa-solid fa-brain"></i></div>
+        <div class="why-icon"><img src="media/dino-category/magnet-circle_dino_17.png" alt="Dino Curious magnet" width="64" height="64" loading="lazy"></div>
         <p class="why-title">Learning Through Play</p>
         <p class="why-sub">STEM · Motor skills · Language</p>
         <p class="why-body">Building, spelling and sorting with magnets grows creativity, problem solving and fine motor skills.</p>
       </div>
       <div class="why-card reveal d3">
-        <div class="why-icon"><i class="fa-solid fa-truck-fast"></i></div>
+        <div class="why-icon"><img src="media/unicorn-category/magnet-circle_unicorn_05.png" alt="Unicorn Excited magnet" width="64" height="64" loading="lazy"></div>
         <p class="why-title">Fast Thai Delivery</p>
         <p class="why-sub">3-5 days · Easy returns</p>
         <p class="why-body">Shipped from Thailand with tracking. Not happy? Return within 30 days for a full refund.</p>
