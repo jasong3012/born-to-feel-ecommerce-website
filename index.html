@@ -227,10 +227,10 @@ button{font-family:inherit}
 .hm-face{
   position:relative;border-radius:50%;transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry));
   box-shadow:0 5px 0 #ece7de,0 7px 0 rgba(0,0,0,.08),0 30px 40px -10px rgba(12,28,36,.6);
-  pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  pointer-events:auto;cursor:default;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
   transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .45s ease;
 }
-/* Hover: lift, straighten and come forward. Tap/click: quick "boing". */
+/* Hover (mouse): lift, straighten and come forward. Tap (touch only): quick "boing". Not clickable. */
 .hm:hover,.hm.tap{z-index:2}
 @media(hover:hover){
   .hm-face:hover{
@@ -245,7 +245,7 @@ button{font-family:inherit}
   65%{transform:rotate(calc(var(--r) - 4deg)) rotateX(6deg) rotateY(calc(var(--ry) / 2)) translateY(0) scale(.96)}
   100%{transform:rotate(var(--r)) rotateX(14deg) rotateY(var(--ry)) scale(1)}
 }
-.hm-face img{display:block;width:100%;height:auto;border-radius:50%}
+.hm-face img{display:block;width:100%;height:auto;border-radius:50%;-webkit-user-drag:none;pointer-events:none}
 .hm-face::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
   background:linear-gradient(140deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 42%),radial-gradient(circle at 50% 120%,rgba(0,0,0,.12),rgba(0,0,0,0) 55%)}
 .hm-1{--s:46%;--x:0%;--y:22%;--r:-10deg;--ry:14deg;--d:1s}
@@ -498,7 +498,6 @@ button{font-family:inherit}
 
 /* ════ HOW TO PAY ════ */
 .pay{background:var(--warm-cream);padding:var(--sec) var(--gutter);border-bottom:1px solid var(--outline)}
-.story + .pay{border-top:1px solid var(--outline)}
 .pay-grid{display:grid;grid-template-columns:7fr 5fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
 @media(max-width:760px){.pay-grid{grid-template-columns:1fr}}
 .steps{display:flex;flex-direction:column;gap:1.25rem}
@@ -1837,34 +1836,7 @@ body.locked{overflow:hidden}
       </ul>
       <!-- TODO: point href at the magnet book file once it's uploaded -->
       <a href="#" class="book-cta"><i class="fa-solid fa-download"></i>Download your free magnet book</a>
-      <a href="#" class="link-arrow">Read our full story <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ 4b. HOW TO PAY ══════════ -->
-<section class="pay" id="pay">
-  <div class="wrap">
-    <div class="pay-grid">
-      <div class="reveal">
-        <div class="accent-bar"></div>
-        <h2 class="h2">Scan, pay, done.</h2>
-        <p class="body-md" style="margin-bottom:2rem">We use PromptPay QR, so you can pay in seconds with K PLUS, SCB EASY, Krungthai NEXT, Bangkok Bank, TrueMoney or any Thai banking app. No card details, no sign-up.</p>
-        <div class="steps">
-          <div class="step"><span class="step-num">1</span><div><p class="step-title">Add to cart &amp; check out</p><p class="step-text">Pick your magnets and enter your delivery details.</p></div></div>
-          <div class="step"><span class="step-num">2</span><div><p class="step-title">Scan the QR code</p><p class="step-text">Your exact total is already in the QR. Just scan and confirm in your bank app.</p></div></div>
-          <div class="step"><span class="step-num">3</span><div><p class="step-title">Send us your slip on LINE</p><p class="step-text">Tap one button to send your order and payment slip. We ship within 24 hours.</p></div></div>
-        </div>
-      </div>
-      <div class="reveal d2">
-        <div class="pay-card">
-          <span class="pp-chip"><i class="fa-solid fa-qrcode"></i> PromptPay</span>
-          <div class="pay-qr-demo" aria-hidden="true"><i class="fa-solid fa-qrcode"></i></div>
-          <p class="pay-card-title">Thai QR Payment</p>
-          <p class="pay-card-text">Accepted by every major Thai bank</p>
-          <div class="bank-row"><span>KBank</span><span>SCB</span><span>KTB</span><span>BBL</span><span>Krungsri</span><span>TrueMoney</span></div>
-        </div>
-      </div>
+      <a href="#" class="link-arrow">Learn how to play <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -1900,6 +1872,33 @@ body.locked{overflow:hidden}
   </div>
 </section>
 
+<!-- ══════════ 4b. HOW TO PAY ══════════ -->
+<section class="pay" id="pay">
+  <div class="wrap">
+    <div class="pay-grid">
+      <div class="reveal">
+        <div class="accent-bar"></div>
+        <h2 class="h2">Scan, pay, done.</h2>
+        <p class="body-md" style="margin-bottom:2rem">We use PromptPay QR, so you can pay in seconds with K PLUS, SCB EASY, Krungthai NEXT, Bangkok Bank, TrueMoney or any Thai banking app. No card details, no sign-up.</p>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span><div><p class="step-title">Add to cart &amp; check out</p><p class="step-text">Pick your magnets and enter your delivery details.</p></div></div>
+          <div class="step"><span class="step-num">2</span><div><p class="step-title">Scan the QR code</p><p class="step-text">Your exact total is already in the QR. Just scan and confirm in your bank app.</p></div></div>
+          <div class="step"><span class="step-num">3</span><div><p class="step-title">Send us your slip on LINE</p><p class="step-text">Tap one button to send your order and payment slip. We ship within 24 hours.</p></div></div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="pay-card">
+          <span class="pp-chip"><i class="fa-solid fa-qrcode"></i> PromptPay</span>
+          <div class="pay-qr-demo" aria-hidden="true"><i class="fa-solid fa-qrcode"></i></div>
+          <p class="pay-card-title">Thai QR Payment</p>
+          <p class="pay-card-text">Accepted by every major Thai bank</p>
+          <div class="bank-row"><span>KBank</span><span>SCB</span><span>KTB</span><span>BBL</span><span>Krungsri</span><span>TrueMoney</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ 7. TESTIMONIALS ══════════ -->
 <section class="testimonials" id="reviews">
   <div class="wrap">
@@ -1913,7 +1912,7 @@ body.locked{overflow:hidden}
           <div><div class="t-name">Khun Nok P. <span class="t-meta">· Bangkok</span></div><div class="t-stars">★★★★★</div></div>
         </div>
         <p class="t-text">My two boys have played with the Rainbow Magnetic Tiles every single day since they arrived. Castles, rockets, garages. Strong magnets and nothing has broken yet. Best toy purchase this year.</p>
-        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Verified parent · Rainbow Magnetic Tiles</span>
+        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Happy parent - Rabbit Collection · Excited</span>
       </div>
 
       <div class="t-card">
@@ -1922,7 +1921,7 @@ body.locked{overflow:hidden}
           <div><div class="t-name">Arthit S. <span class="t-meta">· Chiang Mai</span></div><div class="t-stars">★★★★★</div></div>
         </div>
         <p class="t-text">My daughter is learning her Thai letters with the ก–ฮ magnets on our fridge. She asks to "play letters" every morning. Delivery took only two days.</p>
-        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Verified parent · Thai Alphabet Magnets</span>
+        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Happy parent - Dino Collection · Brave</span>
       </div>
 
       <div class="t-card">
@@ -1931,7 +1930,7 @@ body.locked{overflow:hidden}
           <div><div class="t-name">Ploy W. <span class="t-meta">· Nonthaburi</span></div><div class="t-stars">★★★★★</div></div>
         </div>
         <p class="t-text">Bought the fishing game as a birthday gift and the kids at the party fought over it in the best way. Paying with PromptPay was so quick.</p>
-        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Verified parent · Magnetic Fishing Game</span>
+        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Happy parent - Unicorn Collection · Curious</span>
       </div>
 
       <div class="t-card">
@@ -1940,7 +1939,7 @@ body.locked{overflow:hidden}
           <div><div class="t-name">Sarah L. <span class="t-meta">· Phuket</span></div><div class="t-stars">★★★★★</div></div>
         </div>
         <p class="t-text">Great quality, safe-feeling pieces with no sharp edges. One tile arrived scratched and they sent a replacement the next day, no questions asked.</p>
-        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Verified parent · Magnetic Tiles Starter</span>
+        <span class="t-verified"><i class="fa-solid fa-circle-check"></i>Happy parent - Dino Collection · Happy</span>
       </div>
 
       <div class="t-nav">
@@ -2288,9 +2287,10 @@ function applyFilter(f,initial){
 }
 seeMore.addEventListener('click',function(){showMore(true)});
 
-// ── HERO MAGNETS: playful bounce on tap/click ──
+// ── HERO MAGNETS: playful bounce on touch taps (mouse clicks do nothing) ──
 document.querySelectorAll('.hm').forEach(function(m){
-  m.querySelector('.hm-face').addEventListener('pointerdown',function(){
+  m.querySelector('.hm-face').addEventListener('pointerdown',function(e){
+    if(e.pointerType==='mouse') return;
     m.classList.remove('tap');void m.offsetWidth;m.classList.add('tap');
   });
   m.addEventListener('animationend',function(e){if(e.animationName==='hmBoing') m.classList.remove('tap')});
