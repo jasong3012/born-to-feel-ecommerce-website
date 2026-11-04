@@ -2315,7 +2315,7 @@ function showMore(reveal){
   shown=next;
   var left=curList.length-shown;
   seeMore.hidden=left===0;
-  seeMore.textContent='SEE MORE'+(curFilter==='all'?'':' '+LABELS[curFilter].toUpperCase())+' MAGNETS ('+left+')';
+  seeMore.textContent='SEE MORE'+(curFilter==='all'?'':' '+LABELS[curFilter].toUpperCase())+' MAGNETS ('+shown+'/'+curList.length+')';
 }
 function applyFilter(f,initial){
   curFilter=f;
