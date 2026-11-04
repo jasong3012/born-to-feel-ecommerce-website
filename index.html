@@ -399,9 +399,9 @@ button{font-family:inherit}
 
 /* ════ 5. WHY / BENEFITS ════ */
 .why{background:var(--main);padding:var(--sec) var(--gutter);position:relative;overflow:hidden}
-.why-line{width:60px;height:3px;border-radius:2px;background:var(--darker);margin:1.2rem 0}
-.why-h2{font-size:clamp(24px,3.5vw,34px);font-weight:900;color:var(--darker)}
-.why-intro{font-size:16px;line-height:1.8;color:var(--darker);max-width:560px;margin:.75rem 0 3.5rem}
+.why-line{width:60px;height:3px;border-radius:2px;background:var(--off-white);margin:1.2rem 0}
+.why-h2{font-size:clamp(24px,3.5vw,34px);font-weight:900;color:var(--off-white)}
+.why-intro{font-size:16px;line-height:1.8;color:var(--off-white);max-width:560px;margin:.75rem 0 3.5rem}
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media(max-width:760px){.why-grid{grid-template-columns:1fr}}
 .why-card{background:#fff;border-radius:12px;padding:1.75rem;box-shadow:0 2px 12px rgba(0,0,0,.07);transition:box-shadow .3s,transform .3s}
@@ -457,8 +457,9 @@ button{font-family:inherit}
 /* ════ 9. NEWSLETTER CTA ════ */
 .cta{background:var(--main);color:var(--darker);padding:var(--sec) var(--gutter);text-align:center}
 .cta-inner{max-width:640px;margin:0 auto}
-.cta-h2{font-size:clamp(22px,3.5vw,34px);font-weight:900;color:var(--darker);margin-bottom:.75rem}
-.cta-sub{font-size:16px;color:var(--darker);margin:0 auto 2.5rem;line-height:1.7;max-width:540px}
+.cta-line{width:60px;height:3px;border-radius:2px;background:var(--off-white);margin:0 auto 1.4rem}
+.cta-h2{font-size:clamp(22px,3.5vw,34px);font-weight:900;color:var(--off-white);margin-bottom:.75rem}
+.cta-sub{font-size:16px;color:var(--off-white);margin:0 auto 2.5rem;line-height:1.7;max-width:540px}
 .cta-form{display:flex;gap:.75rem;max-width:520px;margin:0 auto}
 .cta-form input{
   flex:1;min-width:0;background:#fff;border:1.5px solid #fff;border-radius:999px;
@@ -467,7 +468,7 @@ button{font-family:inherit}
 .cta-form input::placeholder{color:var(--muted)}
 .cta-form input:focus{border-color:var(--darker)}
 .cta-form .btn-light{background:var(--darker);color:#fff}
-.cta-note{font-size:12px;color:var(--darker);margin-top:1rem}
+.cta-note{font-size:12px;color:var(--off-white);margin-top:1rem}
 .cta-msg{font-size:14px;font-weight:600;color:var(--darker);margin-top:1rem;min-height:1.2em}
 @media(max-width:480px){.cta-form{flex-direction:column}.cta-form .btn-light{width:100%}}
 
@@ -1952,6 +1953,7 @@ body.locked{overflow:hidden}
 <!-- ══════════ 9. NEWSLETTER CTA ══════════ -->
 <section class="cta">
   <div class="cta-inner">
+    <div class="cta-line reveal"></div>
     <h2 class="cta-h2 reveal">Get 10% off your first order.</h2>
     <p class="cta-sub reveal d1">Join the Born to Feel family for new magnet sets, play ideas for little ones and parent-only offers.</p>
     <form class="cta-form reveal d2" id="cta-form" novalidate>
