@@ -114,11 +114,14 @@ button{font-family:inherit}
   background:#fff;border:1.5px solid var(--main);color:var(--dark);font-size:12px;font-weight:700;
   transition:background .2s,border-color .2s,transform .2s;
 }
-.nav-links .nav-cta:hover{background:var(--main);border-color:var(--main);color:var(--darker);transform:translateY(-1px)}
+.nav-links .nav-cta:hover{background:var(--main);border-color:var(--main);color:#ffffffe6;transform:translateY(-1px)}
 .nav-cta i{font-size:11px}
 .nav-icons{display:flex;align-items:center;gap:1.25rem;color:var(--dark);font-size:17px}
 /* ── Search dropdown ── */
-.search{position:relative;display:flex}
+.search,.wl{position:relative;display:flex}
+.wish-count[hidden]{display:none}
+.nav-icons .sr-remove,.wl-modal .sr-remove{background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;min-width:28px;border-radius:50%;font-size:13px;color:var(--muted);transition:background .2s,color .2s}
+.nav-icons .sr-remove:hover,.wl-modal .sr-remove:hover{background:rgba(40,39,64,.08);color:var(--darker)}
 .search-panel{
   position:absolute;top:calc(100% + 20px);right:-12px;width:380px;z-index:60;
   background:var(--off-white);border:1px solid var(--outline);border-radius:12px;
@@ -139,16 +142,16 @@ button{font-family:inherit}
 .sr-info{flex:1;min-width:0;line-height:1.3}
 .sr-name{font-size:13px;font-weight:700;color:var(--dark)}
 .sr-meta{font-size:12px;color:var(--muted)}
-.nav-icons .sr-add{
+.nav-icons .sr-add,.wl-modal .sr-add{
   flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;background:var(--dark);color:#fff;border:none;border-radius:999px;
   padding:8px 12px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s;
 }
-.nav-icons .sr-add:hover{background:var(--darker)}
-.nav-icons .sr-add.added{background:var(--main);color:var(--darker)}
+.nav-icons .sr-add:hover,.wl-modal .sr-add:hover{background:var(--darker)}
+.nav-icons .sr-add.added,.wl-modal .sr-add.added{background:var(--main);color:var(--darker)}
 .sr-empty{padding:1rem .25rem;color:var(--muted);font-size:13px}
 .sr-more{font-size:12px;color:var(--muted);padding:.5rem .25rem 0}
 @media(max-width:820px){
-  .search{position:static}
+  .search,.wl{position:static}
   .search-panel{position:fixed;top:76px;left:12px;right:12px;width:auto}
 }
 .nav-icons button{background:none;border:none;color:inherit;font-size:inherit;cursor:pointer;position:relative;min-width:24px;min-height:24px}
@@ -279,9 +282,9 @@ button{font-family:inherit}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:var(--container);margin:0 auto;text-align:center}
 .stat-col{padding:0 1.5rem}
 .stat-col+.stat-col{border-left:1px solid var(--outline)}
-.stat-num{font-size:clamp(34px,4.5vw,48px);font-weight:800;line-height:1.1;color:var(--dark);margin-bottom:.4rem}
+.stat-num{font-size:clamp(34px,4.5vw,48px);font-weight:800;line-height:1.1;color:var(--darker);margin-bottom:.4rem}
 .stat-star{color:var(--gold)}
-.stat-desc{font-size:14px;color:var(--muted);line-height:1.55;max-width:160px;margin:0 auto}
+.stat-desc{font-size:14px;color:var(--darker);line-height:1.55;max-width:160px;margin:0 auto}
 @media(max-width:760px){
   .stats-grid{grid-template-columns:1fr 1fr;row-gap:2rem}
   .stat-col:nth-child(3){border-left:none}
@@ -399,9 +402,9 @@ button{font-family:inherit}
 
 /* ════ 5. WHY / BENEFITS ════ */
 .why{background:var(--main);padding:var(--sec) var(--gutter);position:relative;overflow:hidden}
-.why-line{width:60px;height:3px;border-radius:2px;background:var(--darker);margin:1.2rem 0}
-.why-h2{font-size:clamp(24px,3.5vw,34px);font-weight:900;color:var(--darker)}
-.why-intro{font-size:16px;line-height:1.8;color:var(--darker);max-width:560px;margin:.75rem 0 3.5rem}
+.why-line{width:60px;height:3px;border-radius:2px;background:var(--off-white);margin:1.2rem 0}
+.why-h2{font-size:clamp(24px,3.5vw,34px);font-weight:900;color:var(--off-white)}
+.why-intro{font-size:16px;line-height:1.8;color:var(--off-white);max-width:560px;margin:.75rem 0 3.5rem}
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media(max-width:760px){.why-grid{grid-template-columns:1fr}}
 .why-card{background:#fff;border-radius:12px;padding:1.75rem;box-shadow:0 2px 12px rgba(0,0,0,.07);transition:box-shadow .3s,transform .3s}
@@ -411,22 +414,22 @@ button{font-family:inherit}
 .why-card:hover .why-icon{transform:rotate(-8deg) scale(1.08)}
 .why-title{font-size:17px;font-weight:800;line-height:1.35;color:var(--darker);margin-bottom:.3rem}
 .why-sub{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--dark);margin-bottom:1rem}
-.why-body{font-size:14px;font-weight:300;line-height:1.7;color:rgba(44,44,44,.68)}
+.why-body{font-size:14px;font-weight:300;line-height:1.7;color:var(--muted)}
 
 /* ════ 6. STORY ════ */
 .story{background:var(--tint);padding:var(--sec) var(--gutter)}
 .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;max-width:var(--container);margin:0 auto}
 @media(max-width:760px){.story-grid{grid-template-columns:1fr}}
 .story-photo{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 8px 32px rgba(40,39,64,.14)}
-.blockquote{border-left:4px solid var(--main);padding-left:1.5rem;margin:1.75rem 0;font-size:clamp(17px,2.1vw,21px);font-weight:500;line-height:1.5;color:var(--dark)}
+.blockquote{border-left:4px solid var(--main);padding-left:1.5rem;margin:1.75rem 0;font-size:clamp(17px,2.1vw,21px);font-weight:500;line-height:1.5;color:var(--darker)}
 .check-list{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-bottom:2rem}
 /* Light pill CTA, same look as the nav's book button */
 .book-cta{
   display:flex;width:fit-content;align-items:center;gap:.55rem;margin-bottom:1.5rem;padding:12px 20px;border-radius:999px;
-  background:var(--main);border:1.5px solid var(--main);color:var(--darker);font-size:13px;font-weight:700;
+  background:var(--dark);border:1.5px solid var(--dark);color:#ffffffe6;font-size:13px;font-weight:700;
   transition:background .2s,border-color .2s,transform .2s;
 }
-.book-cta:hover{background:var(--dark);border-color:var(--dark);color:#fff;transform:translateY(-1px)}
+.book-cta:hover{background:var(--darker);border-color:var(--darker);color:#fff;transform:translateY(-1px)}
 .book-cta i{font-size:12px}
 .check-item{display:flex;align-items:flex-start;gap:.75rem;font-size:15.5px;color:var(--text)}
 .check-icon{color:var(--main);font-size:17px;flex-shrink:0;margin-top:2px}
@@ -457,8 +460,9 @@ button{font-family:inherit}
 /* ════ 9. NEWSLETTER CTA ════ */
 .cta{background:var(--main);color:var(--darker);padding:var(--sec) var(--gutter);text-align:center}
 .cta-inner{max-width:640px;margin:0 auto}
-.cta-h2{font-size:clamp(22px,3.5vw,34px);font-weight:900;color:var(--darker);margin-bottom:.75rem}
-.cta-sub{font-size:16px;color:var(--darker);margin:0 auto 2.5rem;line-height:1.7;max-width:540px}
+.cta-line{width:60px;height:3px;border-radius:2px;background:var(--off-white);margin:0 auto 1.4rem}
+.cta-h2{font-size:clamp(22px,3.5vw,34px);font-weight:900;color:var(--off-white);margin-bottom:.75rem}
+.cta-sub{font-size:16px;color:var(--off-white);margin:0 auto 2.5rem;line-height:1.7;max-width:540px}
 .cta-form{display:flex;gap:.75rem;max-width:520px;margin:0 auto}
 .cta-form input{
   flex:1;min-width:0;background:#fff;border:1.5px solid #fff;border-radius:999px;
@@ -467,7 +471,7 @@ button{font-family:inherit}
 .cta-form input::placeholder{color:var(--muted)}
 .cta-form input:focus{border-color:var(--darker)}
 .cta-form .btn-light{background:var(--darker);color:#fff}
-.cta-note{font-size:12px;color:var(--darker);margin-top:1rem}
+.cta-note{font-size:12px;color:var(--off-white);margin-top:1rem}
 .cta-msg{font-size:14px;font-weight:600;color:var(--darker);margin-top:1rem;min-height:1.2em}
 @media(max-width:480px){.cta-form{flex-direction:column}.cta-form .btn-light{width:100%}}
 
@@ -549,6 +553,20 @@ button{font-family:inherit}
 .modal.show .modal-box{transform:none}
 .modal-x{position:absolute;top:.75rem;right:.75rem}
 .modal-title{font-size:22px;font-weight:900;color:var(--dark);margin-bottom:1.25rem}
+/* Wishlist / membership pop-up */
+.soon-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(107,187,174,.18);color:var(--dark);border:1px solid rgba(107,187,174,.5);border-radius:999px;padding:4px 12px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.wl-title{color:var(--darker);margin-bottom:.6rem}
+.wl-intro{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+.wl-perks{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem;font-size:14px;color:var(--darker)}
+.wl-perks li{display:flex;gap:.6rem;align-items:flex-start;line-height:1.45}
+.wl-perks i{color:var(--main);margin-top:2px}
+.wl-actions{display:flex;gap:.6rem}
+.wl-btn{flex:1;padding:13px 14px;border-radius:999px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--dark)}
+.wl-btn-solid{background:var(--dark);color:#fff}
+.wl-btn-outline{background:transparent;color:var(--dark)}
+.wl-btn:disabled{opacity:.45;cursor:not-allowed}
+.wl-note{font-size:12px;color:var(--muted);margin-top:.75rem;text-align:center}
+.wl-saved{border-top:1px solid var(--outline);margin-top:1.25rem;padding-top:.25rem}
 .fld{display:block;margin-bottom:1rem}
 .fld span{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:.35rem}
 .fld input,.fld textarea{width:100%;font-family:inherit;font-size:15px;color:var(--text);background:#fff;border:1px solid rgba(114,120,123,.35);border-radius:6px;padding:11px 12px;outline:none;transition:border-color .2s;resize:vertical}
@@ -621,6 +639,9 @@ body.locked{overflow:hidden}
         </div>
       </div>
       <button aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <div class="wl">
+        <button aria-label="Wishlist" id="wish-btn" aria-haspopup="dialog" aria-controls="wish-modal"><i class="fa-regular fa-heart"></i><span class="cart-count wish-count" id="wish-count" hidden>0</span></button>
+      </div>
       <button aria-label="Cart" id="cart-btn"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count" id="cart-count">0</span></button>
       <button class="menu-btn" aria-label="Menu" id="menu-btn"><i class="fa-solid fa-bars"></i></button>
     </div>
@@ -1952,6 +1973,7 @@ body.locked{overflow:hidden}
 <!-- ══════════ 9. NEWSLETTER CTA ══════════ -->
 <section class="cta">
   <div class="cta-inner">
+    <div class="cta-line reveal"></div>
     <h2 class="cta-h2 reveal">Get 10% off your first order.</h2>
     <p class="cta-sub reveal d1">Join the Born to Feel family for new magnet sets, play ideas for little ones and parent-only offers.</p>
     <form class="cta-form reveal d2" id="cta-form" novalidate>
@@ -2034,6 +2056,31 @@ body.locked{overflow:hidden}
 </aside>
 
 <!-- ══════════ CHECKOUT MODAL ══════════ -->
+<!-- ══════════ WISHLIST / MEMBERSHIP POP-UP ══════════ -->
+<div class="modal wl-modal" id="wish-modal" role="dialog" aria-modal="true" aria-labelledby="wish-title" aria-hidden="true">
+  <div class="modal-box">
+    <button class="icon-btn modal-x" id="wish-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <span class="soon-tag"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>Coming soon</span>
+    <h2 class="modal-title wl-title" id="wish-title">Join Born to Feel membership</h2>
+    <p class="wl-intro">Log in or create an account to unlock membership perks and benefits:</p>
+    <ul class="wl-perks">
+      <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i>Keep your wishlist on any device</li>
+      <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i>Member-only offers and early access to new magnets</li>
+      <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i>Faster checkout with saved delivery details</li>
+    </ul>
+    <div class="wl-actions">
+      <button type="button" class="wl-btn wl-btn-solid" disabled>Log in</button>
+      <button type="button" class="wl-btn wl-btn-outline" disabled>Create account</button>
+    </div>
+    <p class="wl-note">Accounts are coming soon. Until then, magnets you heart are saved on this device.</p>
+    <div class="wl-saved">
+      <p class="search-head" id="wish-status" aria-live="polite"></p>
+      <ul class="search-results" id="wish-list"></ul>
+    </div>
+    <button type="button" class="text-btn" id="wish-later">Maybe later</button>
+  </div>
+</div>
+
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
   <div class="modal-box">
     <button class="icon-btn modal-x" id="modal-close" aria-label="Close checkout"><i class="fa-solid fa-xmark"></i></button>
@@ -2193,12 +2240,7 @@ document.querySelectorAll('.add-btn').forEach(function(btn){
     showToast(k+' added · Cart total '+baht(totals().total));
   });
 });
-document.querySelectorAll('.prod-wish').forEach(function(w){
-  w.addEventListener('click',function(){
-    var on=w.classList.toggle('on');
-    w.innerHTML=on?'<i class="fa-solid fa-heart"></i>':'<i class="fa-regular fa-heart"></i>';
-  });
-});
+
 
 // ── DRAWER + CHECKOUT ──
 var drawer=document.getElementById('drawer'),overlay=document.getElementById('overlay'),modal=document.getElementById('modal');
@@ -2371,6 +2413,72 @@ document.querySelectorAll('.cat-card').forEach(function(c){
   panel.addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();close(true)}});
   // isTrusted: ignore the scripted card click made by "Add", which would otherwise close the panel
   document.addEventListener('click',function(e){if(e.isTrusted&&!panel.hidden&&!e.target.closest('.search')) close(false)});
+})();
+
+// ── WISHLIST ── card hearts + nav heart; saved on this device only
+(function(){
+  var KEY='btf-wishlist',saved=[];
+  try{saved=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){}
+  var btn=document.getElementById('wish-btn'),modal=document.getElementById('wish-modal'),
+      list=document.getElementById('wish-list'),status=document.getElementById('wish-status'),count=document.getElementById('wish-count');
+  var cards={};
+  document.querySelectorAll('#prod-grid .prod-card').forEach(function(c){cards[c.querySelector('.add-btn').getAttribute('data-name')]=c});
+  saved=saved.filter(function(n){return cards[n]});
+  function store(){try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(e){}}
+  function paintHeart(name){
+    var w=cards[name].querySelector('.prod-wish'),on=saved.indexOf(name)>=0;
+    w.classList.toggle('on',on);
+    w.innerHTML=on?'<i class="fa-solid fa-heart"></i>':'<i class="fa-regular fa-heart"></i>';
+    w.setAttribute('aria-pressed',on);
+    w.setAttribute('aria-label',(on?'Remove ':'Add ')+name+(on?' from':' to')+' wishlist');
+  }
+  function render(){
+    count.textContent=saved.length;count.hidden=!saved.length;
+    btn.setAttribute('aria-label','Wishlist, '+saved.length+' saved');
+    status.textContent=saved.length?'Saved on this device ('+saved.length+')':'Saved on this device';
+    list.innerHTML=saved.length?'':'<li class="sr-empty">Nothing saved yet. Tap the heart on any magnet to save it here.</li>';
+    saved.forEach(function(name){
+      var card=cards[name],col=card.getAttribute('data-c');
+      var li=document.createElement('li');li.className='sr-item';
+      li.innerHTML='<img alt="" width="44" height="44"><div class="sr-info"><p class="sr-name"></p><p class="sr-meta"></p></div>'+
+        '<button type="button" class="sr-add"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i>Add</button>'+
+        '<button type="button" class="sr-remove"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>';
+      li.querySelector('img').src=card.querySelector('.prod-img img').getAttribute('src');
+      li.querySelector('.sr-name').textContent=LABELS[col]+' · '+name.split(': ').pop();
+      li.querySelector('.sr-meta').textContent=card.querySelector('.prod-price').textContent;
+      var add=li.querySelector('.sr-add');
+      add.setAttribute('aria-label','Add '+name+' to cart');
+      add.addEventListener('click',function(){
+        card.querySelector('.add-btn').click(); // reuse the product card's cart logic
+        add.classList.add('added');add.innerHTML='<i class="fa-solid fa-check" aria-hidden="true"></i>Added';
+        setTimeout(function(){add.classList.remove('added');add.innerHTML='<i class="fa-solid fa-cart-plus" aria-hidden="true"></i>Add'},1600);
+      });
+      var rm=li.querySelector('.sr-remove');
+      rm.setAttribute('aria-label','Remove '+name+' from wishlist');
+      rm.addEventListener('click',function(){toggle(name);document.getElementById('wish-later').focus()});
+      list.appendChild(li);
+    });
+  }
+  function toggle(name){
+    var i=saved.indexOf(name);
+    if(i>=0) saved.splice(i,1); else saved.push(name);
+    store();paintHeart(name);render();
+    count.classList.add('bump');setTimeout(function(){count.classList.remove('bump')},250);
+  }
+  Object.keys(cards).forEach(function(name){
+    paintHeart(name);
+    cards[name].querySelector('.prod-wish').addEventListener('click',function(){toggle(name)});
+  });
+  render();
+  // Heart in the menu opens the membership pop-up (accounts coming soon) with this device's saved magnets
+  function isOpen(){return modal.classList.contains('show')}
+  function open(){modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.classList.add('locked');document.getElementById('wish-close').focus()}
+  function close(){if(!isOpen()) return;modal.classList.remove('show');modal.setAttribute('aria-hidden','true');document.body.classList.remove('locked');btn.focus()}
+  btn.addEventListener('click',open);
+  document.getElementById('wish-close').addEventListener('click',close);
+  document.getElementById('wish-later').addEventListener('click',close);
+  modal.addEventListener('click',function(e){if(e.target===modal) close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen()) close()});
 })();
 
 // ── TESTIMONIALS ──
