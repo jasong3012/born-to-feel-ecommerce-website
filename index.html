@@ -118,7 +118,10 @@ button{font-family:inherit}
 .nav-cta i{font-size:11px}
 .nav-icons{display:flex;align-items:center;gap:1.25rem;color:var(--dark);font-size:17px}
 /* ── Search dropdown ── */
-.search{position:relative;display:flex}
+.search,.wl{position:relative;display:flex}
+.wish-count[hidden]{display:none}
+.nav-icons .sr-remove{flex-shrink:0;width:28px;height:28px;min-width:28px;border-radius:50%;font-size:13px;color:var(--muted);transition:background .2s,color .2s}
+.nav-icons .sr-remove:hover{background:rgba(40,39,64,.08);color:var(--darker)}
 .search-panel{
   position:absolute;top:calc(100% + 20px);right:-12px;width:380px;z-index:60;
   background:var(--off-white);border:1px solid var(--outline);border-radius:12px;
@@ -148,7 +151,7 @@ button{font-family:inherit}
 .sr-empty{padding:1rem .25rem;color:var(--muted);font-size:13px}
 .sr-more{font-size:12px;color:var(--muted);padding:.5rem .25rem 0}
 @media(max-width:820px){
-  .search{position:static}
+  .search,.wl{position:static}
   .search-panel{position:fixed;top:76px;left:12px;right:12px;width:auto}
 }
 .nav-icons button{background:none;border:none;color:inherit;font-size:inherit;cursor:pointer;position:relative;min-width:24px;min-height:24px}
@@ -622,6 +625,13 @@ body.locked{overflow:hidden}
         </div>
       </div>
       <button aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <div class="wl">
+        <button aria-label="Wishlist" id="wish-btn" aria-expanded="false" aria-controls="wish-panel"><i class="fa-regular fa-heart"></i><span class="cart-count wish-count" id="wish-count" hidden>0</span></button>
+        <div class="search-panel" id="wish-panel" role="dialog" aria-label="Wishlist" hidden>
+          <p class="search-head" id="wish-status" aria-live="polite"></p>
+          <ul class="search-results" id="wish-list"></ul>
+        </div>
+      </div>
       <button aria-label="Cart" id="cart-btn"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count" id="cart-count">0</span></button>
       <button class="menu-btn" aria-label="Menu" id="menu-btn"><i class="fa-solid fa-bars"></i></button>
     </div>
@@ -2195,12 +2205,7 @@ document.querySelectorAll('.add-btn').forEach(function(btn){
     showToast(k+' added · Cart total '+baht(totals().total));
   });
 });
-document.querySelectorAll('.prod-wish').forEach(function(w){
-  w.addEventListener('click',function(){
-    var on=w.classList.toggle('on');
-    w.innerHTML=on?'<i class="fa-solid fa-heart"></i>':'<i class="fa-regular fa-heart"></i>';
-  });
-});
+
 
 // ── DRAWER + CHECKOUT ──
 var drawer=document.getElementById('drawer'),overlay=document.getElementById('overlay'),modal=document.getElementById('modal');
@@ -2373,6 +2378,69 @@ document.querySelectorAll('.cat-card').forEach(function(c){
   panel.addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();close(true)}});
   // isTrusted: ignore the scripted card click made by "Add", which would otherwise close the panel
   document.addEventListener('click',function(e){if(e.isTrusted&&!panel.hidden&&!e.target.closest('.search')) close(false)});
+})();
+
+// ── WISHLIST ── card hearts + nav heart; saved on this device only
+(function(){
+  var KEY='btf-wishlist',saved=[];
+  try{saved=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){}
+  var btn=document.getElementById('wish-btn'),panel=document.getElementById('wish-panel'),
+      list=document.getElementById('wish-list'),status=document.getElementById('wish-status'),count=document.getElementById('wish-count');
+  var cards={};
+  document.querySelectorAll('#prod-grid .prod-card').forEach(function(c){cards[c.querySelector('.add-btn').getAttribute('data-name')]=c});
+  saved=saved.filter(function(n){return cards[n]});
+  function store(){try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(e){}}
+  function paintHeart(name){
+    var w=cards[name].querySelector('.prod-wish'),on=saved.indexOf(name)>=0;
+    w.classList.toggle('on',on);
+    w.innerHTML=on?'<i class="fa-solid fa-heart"></i>':'<i class="fa-regular fa-heart"></i>';
+    w.setAttribute('aria-pressed',on);
+    w.setAttribute('aria-label',(on?'Remove ':'Add ')+name+(on?' from':' to')+' wishlist');
+  }
+  function render(){
+    count.textContent=saved.length;count.hidden=!saved.length;
+    btn.setAttribute('aria-label','Wishlist, '+saved.length+' saved');
+    status.textContent=saved.length?'Your wishlist ('+saved.length+')':'Your wishlist';
+    list.innerHTML=saved.length?'':'<li class="sr-empty">Tap the heart on any magnet to save it here.</li>';
+    saved.forEach(function(name){
+      var card=cards[name],col=card.getAttribute('data-c');
+      var li=document.createElement('li');li.className='sr-item';
+      li.innerHTML='<img alt="" width="44" height="44"><div class="sr-info"><p class="sr-name"></p><p class="sr-meta"></p></div>'+
+        '<button type="button" class="sr-add"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i>Add</button>'+
+        '<button type="button" class="sr-remove"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>';
+      li.querySelector('img').src=card.querySelector('.prod-img img').getAttribute('src');
+      li.querySelector('.sr-name').textContent=LABELS[col]+' · '+name.split(': ').pop();
+      li.querySelector('.sr-meta').textContent=card.querySelector('.prod-price').textContent;
+      var add=li.querySelector('.sr-add');
+      add.setAttribute('aria-label','Add '+name+' to cart');
+      add.addEventListener('click',function(){
+        card.querySelector('.add-btn').click(); // reuse the product card's cart logic
+        add.classList.add('added');add.innerHTML='<i class="fa-solid fa-check" aria-hidden="true"></i>Added';
+        setTimeout(function(){add.classList.remove('added');add.innerHTML='<i class="fa-solid fa-cart-plus" aria-hidden="true"></i>Add'},1600);
+      });
+      var rm=li.querySelector('.sr-remove');
+      rm.setAttribute('aria-label','Remove '+name+' from wishlist');
+      rm.addEventListener('click',function(){toggle(name);btn.focus()});
+      list.appendChild(li);
+    });
+  }
+  function toggle(name){
+    var i=saved.indexOf(name);
+    if(i>=0) saved.splice(i,1); else saved.push(name);
+    store();paintHeart(name);render();
+    count.classList.add('bump');setTimeout(function(){count.classList.remove('bump')},250);
+  }
+  Object.keys(cards).forEach(function(name){
+    paintHeart(name);
+    cards[name].querySelector('.prod-wish').addEventListener('click',function(){toggle(name)});
+  });
+  render();
+  function open(){panel.hidden=false;btn.setAttribute('aria-expanded','true');var f=panel.querySelector('button');if(f) f.focus()}
+  function close(refocus){if(panel.hidden) return;panel.hidden=true;btn.setAttribute('aria-expanded','false');if(refocus) btn.focus()}
+  btn.addEventListener('click',function(){panel.hidden?open():close(true)});
+  panel.addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();close(true)}});
+  // isTrusted: ignore the scripted card click made by "Add"
+  document.addEventListener('click',function(e){if(e.isTrusted&&!panel.hidden&&!e.target.closest('.wl')) close(false)});
 })();
 
 // ── TESTIMONIALS ──
